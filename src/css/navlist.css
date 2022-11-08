@@ -1,0 +1,22 @@
+.nav-list{
+    width: 50%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-link{
+    background: #EFEFEF;
+    color: #112B3C;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    font-weight: bolder;
+}
+
+.nav-link:hover{
+    cursor: pointer;
+    background-color: #F66B0E;
+    color: #112B3C;
+    transition: 0.3s all;
+}

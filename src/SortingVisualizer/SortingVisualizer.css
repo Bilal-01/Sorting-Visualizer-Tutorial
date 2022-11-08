@@ -1,7 +1,10 @@
 .array-container {
   position: absolute;
-  left: 100px;
-  /* top: 100px; */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  border: 1px solid black;
 }
 
 .array-bar {
