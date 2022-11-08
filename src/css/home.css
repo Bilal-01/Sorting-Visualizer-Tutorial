@@ -1,17 +1,16 @@
 .home-container{
     position: absolute;
-    top: 3%;
+    top: 6%;
     left: 5%;
     width: 800px;
     height: 500px;
     display: flex;
-    align-items: flex-end;
-    border: 1px solid black;    
+    align-items: flex-end; 
 }
 .code-container{
     position: absolute;
     top: 10%;
-    left:60%;
+    right: 5%;
     width: 500px;
     height: 400px;
     display: flex;
@@ -19,7 +18,7 @@
     border: 1px solid black;    
 }
 .home{
-    height: 73vh;
+    height: 79vh;
     width: 100%;
     position: relative;
 }
@@ -27,4 +26,53 @@
 .rowC{
     display:flex;
     flex-direction:row;
+}
+
+.file-upload{
+    position: absolute;
+    bottom: 2%;
+    left: 5%;
+}
+
+.complexity-container{
+    height: 50px;
+    width: 500px;
+    position: absolute;
+    right: 5%;
+    bottom: 12%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.time-btn, .space-btn{
+    background: #112B3C;
+    color: #D3E4CD;
+    padding: 10px 10px;
+    border-radius: 5px;
+    margin-right: 2px;
+    font-size: 0.85rem;
+    font-weight: bolder;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+
+.time-btn:hover{
+    background: #F66B0E;
+    color: #112B3C;
+    transition: 0.3s all;
+    cursor: pointer;
+}
+
+
+.space-btn{
+    background: #F66B0E;
+    color: #112B3C;
+}
+
+.space-btn:hover{
+    background: #112B3C;
+    color: #D3E4CD;
+    cursor: pointer;
+    transition: 0.3s all;
 }
