@@ -1,16 +1,30 @@
 .home-container{
     position: absolute;
-    top: 5%;
+    top: 3%;
     left: 5%;
-    width: 1200px;
-    height: 620px;
+    width: 800px;
+    height: 500px;
     display: flex;
     align-items: flex-end;
     border: 1px solid black;    
 }
-
+.code-container{
+    position: absolute;
+    top: 10%;
+    left:60%;
+    width: 500px;
+    height: 400px;
+    display: flex;
+    align-items: flex-center;
+    border: 1px solid black;    
+}
 .home{
-    height: 80vh;
+    height: 73vh;
     width: 100%;
     position: relative;
+}
+
+.rowC{
+    display:flex;
+    flex-direction:row;
 }

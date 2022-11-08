@@ -24,6 +24,7 @@ function Home() {
     return(
         <>
         <div className='home'>
+            <div className ='rowC'>
             <div className='home-container'>
                 {
                     arr.map((value, i) => {
@@ -35,6 +36,18 @@ function Home() {
                         ) 
                     })
                 }
+            </div>
+            <div className='code-container'>
+                {
+                    arr.map((value, i) => {
+                        return(
+                            <div >
+                                Hello
+                            </div>
+                        ) 
+                    })
+                }
+            </div>
             </div>
         </div>
         </>

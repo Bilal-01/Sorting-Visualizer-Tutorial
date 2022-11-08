@@ -5,16 +5,34 @@ function NavList () {
     return(
         <div className='nav-list'>
             <button className='nav-link'>
-                Algorithm
+                Insertion Sort
             </button>
             <button className='nav-link'>
-                Algorithm
+                Bubble Sort
             </button>
             <button className='nav-link'>
-                Algorithm
+                Merge Sort
             </button>
             <button className='nav-link'>
-                Algorithm
+                Heap Sort
+            </button>
+            <button className='nav-link'>
+                Quick Sort
+            </button>
+            <button className='nav-link'>
+                Radix Sort
+            </button>
+            <button className='nav-link'>
+                Bucket Sort
+            </button>
+            <button className='nav-link'>
+                Counting Sort
+            </button>
+            <button className='nav-link'>
+               7.4.5 Sort
+            </button>
+            <button className='nav-link'>
+                8.2.4 Sort
             </button>
         </div>
 

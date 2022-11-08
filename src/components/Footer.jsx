@@ -5,10 +5,10 @@ function Footer() {
     return (
         <div className='footer'>
             <span>
-                Mohammad Bilal Aziz the greatest king <br /> 20K-0397  
+                Mohammad Bilal Aziz<br /> 20K-0397  
             </span>
             <span>
-                Maryam Siddiqui a little great assistant <br />  20K-0434
+                Maryam Siddiqui <br />  20K-0434
             </span>
         </div>
 

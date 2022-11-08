@@ -1,6 +1,6 @@
 .header{
     background: #112B3C;
-    color: white;
+    color: #D3E4CD;
     display: flex;
     justify-content: space-between;
 }
@@ -10,5 +10,6 @@
     margin-bottom: 0;
     margin-left: 20px;
     padding: 40px 0px;
-    font-size: 2.6rem;
+    font-size: 2.0rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
