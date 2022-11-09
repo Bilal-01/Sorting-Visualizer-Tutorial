@@ -1,6 +1,8 @@
-import React, { useState, createContext} from 'react';
-import Bars from './Bars';
+import React, { useState, useContext} from 'react';
 import FileUpload from './FileUpload';
+import AlgoContext  from './AlgoContext';
+import Algorithms from './Algorithms';
+import BarContainer from './BarContainer';
 import '../css/home.css';
 
 /*
@@ -11,36 +13,16 @@ RESTRICTIONS
 */
 
 function Home() {
-    const [arr, setArr] = useState([0]);
-    const [x, setX] = useState(0);
-    console.log(arr);
-
+    const algo = useContext(AlgoContext);
     return(
         <>
         <div className='home'>
             <div className ='rowC'>
-                <div className='home-container'>
-                    {
-                        // arr.map((value, i) => {
-                        //     return(
-                        //         <div key = {i} style={{textAlign: 'center'}}>
-                        //             <h3 style={{color: '#205375', marginBottom: '0px' }}>{value}</h3>
-                        //             <Bars num = {value} size={arr.length} />
-                        //         </div>
-                        //     ) 
-                        // })
-                    }
-                </div>
+                <BarContainer />
                 <div>
                     <div className='code-container'>
                         {
-                            // arr.map((value, i) => {
-                            //     return(
-                            //         <div key={i}>
-                            //             Hello
-                            //         </div>
-                            //     ) 
-                            // })
+                            <Algorithms sort={algo.algorithm} />
                         }
                     </div>
                     <div className="complexity-container">
@@ -54,7 +36,7 @@ function Home() {
                 </div>
             </div>
             <div className='file-upload'>
-                <FileUpload handleChange={setArr} onHandle={setX} />
+                <FileUpload />
             </div>
         </div>
         </>

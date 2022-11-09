@@ -2,7 +2,7 @@
     position: absolute;
     top: 6%;
     left: 5%;
-    width: 800px;
+    width: 840px;
     height: 500px;
     display: flex;
     align-items: flex-end; 
@@ -12,10 +12,7 @@
     top: 10%;
     right: 5%;
     width: 500px;
-    height: 400px;
-    display: flex;
-    align-items: flex-center;
-    border: 1px solid black;    
+    height: 400px; 
 }
 .home{
     height: 79vh;
