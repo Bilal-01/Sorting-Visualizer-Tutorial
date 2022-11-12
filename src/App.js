@@ -8,13 +8,16 @@ import './App.css';
 function App() {
   const [arr, setArr] = useState([]);
   const [algorithm, setAlgorithm] = useState('');
+  const [indices, setIndices] = useState([]);
   const [isChanged, setIsChanged] = useState(false);
 
   var algo = {
     algorithm,
     arr,
+    indices,
     setAlgorithm,
     setArr,
+    setIndices,
   }
 
 

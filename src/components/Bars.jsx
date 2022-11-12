@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import AlgoContext from './AlgoContext';
 import '../css/bar.css';
 
 function Bars(props){
-    
+    const algo = useContext(AlgoContext);
     var isZero = false;
     if(props.num === 0){
         isZero = true;
     }
+
+
 
     function getHeight(){
         if (props.num < 100){
@@ -22,11 +25,20 @@ function Bars(props){
             return props.num;
     }
 
+    function setColor(){
+        if(props.index === algo.indices[0] || props.index === algo.indices[1]){
+            return '112B3C';
+        }
+        else{
+            return 'F66B0E';
+        }
+    }
+
     
 
 
     const styles={
-        backgroundColor: '#F66B0E',
+        backgroundColor: `#${setColor()}`,
         height: isZero ? '5px' : `${getHeight()}px`,
         margin: '5px',
         width: '45px',

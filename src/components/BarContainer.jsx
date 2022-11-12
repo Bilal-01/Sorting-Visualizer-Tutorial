@@ -12,7 +12,7 @@ function BarContainer(props){
                algo.arr.map((value, i) => (
                     <div key = {i} style={{textAlign: 'center'}}>
                         <h3 style={{color: '#205375', marginBottom: '0px' }}>{value}</h3>
-                        <Bars num = {value} size={algo.arr.length} />
+                        <Bars num = {value} index={i} />
                     </div>
                 )) 
             }
