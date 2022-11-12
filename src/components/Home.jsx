@@ -1,6 +1,5 @@
-import React, { useState, useContext} from 'react';
+import React  from 'react';
 import FileUpload from './FileUpload';
-import AlgoContext  from './AlgoContext';
 import Algorithms from './Algorithms';
 import BarContainer from './BarContainer';
 import '../css/home.css';
@@ -13,7 +12,7 @@ RESTRICTIONS
 */
 
 function Home() {
-    const algo = useContext(AlgoContext);
+
     return(
         <>
         <div className='home'>
@@ -21,9 +20,7 @@ function Home() {
                 <BarContainer />
                 <div>
                     <div className='code-container'>
-                        {
-                            <Algorithms sort={algo.algorithm} />
-                        }
+                        <Algorithms/>
                     </div>
                     <div className="complexity-container">
                         <button className="time-btn">

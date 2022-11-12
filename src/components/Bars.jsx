@@ -7,8 +7,6 @@ function Bars(props){
     if(props.num === 0){
         isZero = true;
     }
-    var newHeight;
-
 
     function getHeight(){
         if (props.num < 100){
@@ -32,6 +30,7 @@ function Bars(props){
         height: isZero ? '5px' : `${getHeight()}px`,
         margin: '5px',
         width: '45px',
+        transition: '1s height',
     }
 
     return(
