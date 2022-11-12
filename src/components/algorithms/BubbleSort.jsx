@@ -10,13 +10,18 @@ function BubbleSort(props)
        execute();
     }, []);
 
+    
+    // useEffect(() => {
+    //     console.log(algo.arr);
+    //  }, [algo.arr]);
 
-    function execute(){
-        var localArr  = [...algo.arr];
+
+    async function execute(){
+        let localArr  = [...algo.arr];
         for(var i = 0; i < localArr.length; i++){
             for(var j = 0; j < ( localArr.length - i -1 ); j++){
                 if(localArr[j] > localArr[j+1]){
-                    localArr = swap(localArr, j).
+                    localArr = await swap(localArr, j);
                     console.log(localArr);
                 }
             }
@@ -27,12 +32,13 @@ function BubbleSort(props)
     }
 
     async function swap(arr, j){
-        var temp = arr[j]
-        arr[j] = arr[j + 1]
-        arr[j+1] = temp;
+        let tempArr = [...arr];
+        var temp = tempArr[j]
+        tempArr[j] = tempArr[j + 1]
+        tempArr[j+1] = temp;
         await sleep(1000)
-        algo.setArr(arr);
-        return arr;
+        algo.setArr(tempArr);
+        return Promise.resolve(tempArr);
     }
 
     return(
