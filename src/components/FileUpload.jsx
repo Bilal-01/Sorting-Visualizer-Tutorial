@@ -13,6 +13,7 @@ function FileUpload(props){
                 return parseInt(item);
             });
             algo.setArr(arr);
+            algo.setInputArr(arr);
         })
     }
     

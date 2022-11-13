@@ -9,15 +9,20 @@ function App() {
   const [arr, setArr] = useState([]);
   const [algorithm, setAlgorithm] = useState('');
   const [indices, setIndices] = useState([]);
-  const [isChanged, setIsChanged] = useState(false);
+  const [inputArr, setInputArr] = useState([]);
+  const [isSorted, setIsSorted] = useState(false);
 
   var algo = {
     algorithm,
     arr,
     indices,
+    isSorted,
+    inputArr,
     setAlgorithm,
     setArr,
     setIndices,
+    setIsSorted,
+    setInputArr,
   }
 
 

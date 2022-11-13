@@ -5,14 +5,25 @@ import AlgoContext  from '../AlgoContext';
 function Sorts(props)
 {
     const algo = useContext(AlgoContext);
-    let localArr  = [...algo.arr];
+    
+
+    const helperFunctions = {
+        swap, 
+        animateColor, 
+        completeSorted,
+        sleep,
+    };
     
     useEffect(() => {
+        algo.setIsSorted(false);
+        const originalArray = [...algo.inputArr];
+        algo.setArr(originalArray);
+        let localArr  = [...originalArray];
         if(algo.algorithm === 'bubble'){
-            bubbleSort(localArr, swap, animateColor);
+            bubbleSort(localArr, helperFunctions);
         }
         else if(algo.algorithm === 'insertion'){
-            insertionSort(localArr, swap, animateColor);
+            insertionSort(localArr, helperFunctions);
         }
         else if(algo.algorithm === 'quick'){
             
@@ -32,7 +43,11 @@ function Sorts(props)
         else if(algo.algorithm === 'bucket'){
             
         }
-    }, []);
+    }, [algo.algorithm]);
+
+    useEffect(() => {
+        algo.setIndices([]);
+    }, [algo.isSorted]);
 
 
     async function sleep(millis) {
@@ -40,7 +55,7 @@ function Sorts(props)
     }
 
     async function animateColor(i, j){
-        await sleep(1000);
+        await sleep(100);
         let indices = [i, j];
         algo.setIndices(indices);
         return Promise;
@@ -52,9 +67,14 @@ function Sorts(props)
         var temp = tempArr[i]
         tempArr[i] = tempArr[j]
         tempArr[j] = temp;
-        await sleep(500);
+        await sleep(50);
         algo.setArr(tempArr);
         return Promise.resolve(tempArr);
+    }
+
+    async function completeSorted(){
+        algo.setIsSorted(true);
+        return Promise;
     }
 
     return(
@@ -64,29 +84,34 @@ function Sorts(props)
     );
 }
 
-async function bubbleSort(localArr, swap, animateColor){
+async function bubbleSort(localArr, helperFunctions){
+    await helperFunctions.sleep(1000);
     for(var i = 0; i < localArr.length; i++){
         for(var j = 0; j < ( localArr.length - i -1 ); j++){
-            await animateColor(j, j+1);
+            await helperFunctions.animateColor(j, j+1);
             if(localArr[j] > localArr[j+1]){
-                localArr = await swap(localArr, j, j+1);
+                localArr = await helperFunctions.swap(localArr, j, j+1);
             }
         }
     }
+    await helperFunctions.completeSorted();
 }
 
-async function insertionSort(localArr, swap, animateColor){
+async function insertionSort(localArr, helperFunctions){
+    await helperFunctions.sleep(1000);
     let i, j; 
     for (i = 1; i < localArr.length; i++)
     { 
         j = i; 
         while (j >= 0 && localArr[j] < localArr[j-1])
         { 
-            await animateColor(j, j-1);
-            localArr = await swap(localArr, j, j-1);
+            await helperFunctions.animateColor(j, j-1);
+            localArr = await helperFunctions.swap(localArr, j, j-1);
             j = j-1;
         } 
-    } 
+    }
+    await helperFunctions.completeSorted();
+
 }
 
 export default Sorts;
