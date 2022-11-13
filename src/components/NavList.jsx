@@ -9,28 +9,28 @@ function NavList () {
 
     return(
         <div className='nav-list'>
-            <button className='nav-link' onClick={() => algo.setAlgorithm('insertion')} >
+            <button className='nav-link' onClick={() => algo.setAlgorithm('Insertion')} >
                 Insertion Sort
             </button>
-            <button className='nav-link' onClick={() => algo.setAlgorithm('bubble')}>
+            <button className='nav-link' onClick={() => algo.setAlgorithm('Bubble')}>
                 Bubble Sort
             </button>
-            <button className='nav-link' onClick={() => algo.setAlgorithm('merge')}>
+            <button className='nav-link' onClick={() => algo.setAlgorithm('Merge')}>
                 Merge Sort
             </button>
-            <button className='nav-link' onClick={() => algo.setAlgorithm('heap')}>
+            <button className='nav-link' onClick={() => algo.setAlgorithm('Heap')}>
                 Heap Sort
             </button>
-            <button className='nav-link' onClick={() => algo.setAlgorithm('quick')}>
+            <button className='nav-link' onClick={() => algo.setAlgorithm('Quick')}>
                 Quick Sort
             </button>
-            <button className='nav-link' onClick={() => algo.setAlgorithm('radix')}>
+            <button className='nav-link' onClick={() => algo.setAlgorithm('Radix')}>
                 Radix Sort
             </button>
-            <button className='nav-link' onClick={() => algo.setAlgorithm('bucket')}>
+            <button className='nav-link' onClick={() => algo.setAlgorithm('Bucket')}>
                 Bucket Sort
             </button>
-            <button className='nav-link' onClick={() => algo.setAlgorithm('counting')}>
+            <button className='nav-link' onClick={() => algo.setAlgorithm('Counting')}>
                 Counting Sort
             </button>
             <button className='nav-link' onClick={() => algo.setAlgorithm('7.4.5')}>

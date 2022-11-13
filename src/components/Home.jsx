@@ -8,7 +8,7 @@ import '../css/home.css';
 RESTRICTIONS
         1. Negative Numbers
         2. Real Numbers
-        3. Range : 1 - 1000
+        3. Range : 1 - 500?
 */
 
 function Home() {

@@ -8,28 +8,32 @@ function Sorts(props)
     let localArr  = [...algo.arr];
     
     useEffect(() => {
-        if(algo.algorithm === 'bubble'){
+        if(algo.algorithm === 'Bubble'){
             bubbleSort(localArr, swap, animateColor);
         }
-        else if(algo.algorithm === 'insertion'){
+        else if(algo.algorithm === 'Insertion'){
             insertionSort(localArr, swap, animateColor);
         }
-        else if(algo.algorithm === 'quick'){
+        else if(algo.algorithm === 'Quick'){    
+            let high = localArr.length-1;
+            let low = 0;
+            quickSort(localArr, low, high, swap,animateColor);
+            // var sArray= quickSort(localArr,swap,animateColor);
+            // console.log(sArray);
+        }
+        else if(algo.algorithm === 'Merge'){
             
         }
-        else if(algo.algorithm === 'merge'){
+        else if(algo.algorithm === 'Heap'){
             
         }
-        else if(algo.algorithm === 'heap'){
+        else if(algo.algorithm === 'Counting'){
             
         }
-        else if(algo.algorithm === 'counting'){
+        else if(algo.algorithm === 'Radix'){
             
         }
-        else if(algo.algorithm === 'radix'){
-            
-        }
-        else if(algo.algorithm === 'bucket'){
+        else if(algo.algorithm === 'Bucket'){
             
         }
     }, []);
@@ -88,5 +92,49 @@ async function insertionSort(localArr, swap, animateColor){
         } 
     } 
 }
+
+async function partition(localArr, low, high,swap, animateColor) {
+  
+    let pivot = localArr[high];
+    let i = (low - 1);
+    for (let j = low; j <= high - 1; j++) {
+        if (localArr[j] < pivot) {
+            i++;
+            await animateColor(i, j);
+        localArr = await swap(localArr, i, j);
+        }
+    }
+    // await sleep(500);
+    await animateColor(i+1, high);
+    localArr = await swap(localArr, i + 1, high);
+    return Promise.resolve(i + 1);
+
+}
+async function quickSort(localArr, low, high, swap, animateColor)
+{
+    if (low < high) {
+        let pi = await partition(localArr, low, high,swap, animateColor);       
+        await quickSort(localArr, low, pi - 1,swap,animateColor);
+        await quickSort(localArr, pi + 1, high, swap, animateColor);
+        console.log(pi);
+    }    
+}
+
+// async function quickSort(localArr,swap,animateColor) {
+
+// 	if(localArr.length <= 1){ return localArr }
+//     else{
+//         let left = [];
+//         let right = [];
+//         let newArray = [];
+//         let pivot = localArr.pop();
+    
+//         localArr.forEach(value => {
+//             value <= pivot ? left.push(value) : right.push(value);
+//         });
+    
+//         return newArray.concat(await quickSort(left), pivot,await quickSort(right));
+//     }
+// };
 
 export default Sorts;
