@@ -26,12 +26,12 @@ function Bars(props){
     }
 
     function setColor(){
-        if(props.index === algo.indices[0] || props.index === algo.indices[1]){
-            return '112B3C';
+        for(let i=0; i<algo.arr.length; i++){
+            if(props.index === algo.indices[i]){
+                return '112B3C';
+            }
         }
-        else{
-            return 'F66B0E';
-        }
+        return 'F66B0E';
     }
 
     
