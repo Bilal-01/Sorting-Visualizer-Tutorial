@@ -35,7 +35,7 @@ function Sorts(props)
             mergeSort(localArr, 0, localArr.length-1, helperFunctions);
         }
         else if(algo.algorithm === 'Heap'){
-            
+            heapSort(localArr, helperFunctions)
         }
         else if(algo.algorithm === 'Counting'){
             
@@ -259,5 +259,38 @@ async function mergeSort(arr,l, r, helperFunctions){
 //         return newArray.concat(await quickSort(left), pivot,await quickSort(right));
 //     }
 // };
+
+async function heapSort(arr, helperFunctions)
+{
+    var N = arr.length;
+    for (var i = Math.floor(N / 2) - 1; i >= 0; i--)
+        arr = await heapify(arr, N, i, helperFunctions);
+    for (var i = N - 1; i > 0; i--) {
+        await helperFunctions.animateColor([0, i]);
+        arr = await helperFunctions.swap(arr, 0, i);
+        arr = await heapify(arr, i, 0, helperFunctions);
+    }
+    await helperFunctions.completeSorted();
+}
+async function heapify(arr, N, i, helperFunctions)
+{
+    var largest = i; 
+    var l = 2 * i + 1; 
+    var r = 2 * i + 2; 
+
+    if (l < N && arr[l] > arr[largest])
+        largest = l;
+
+    if (r < N && arr[r] > arr[largest])
+        largest = r;
+        
+    if (largest != i) {
+        await helperFunctions.animateColor([i, largest]);
+        arr = await helperFunctions.swap(arr, i, largest);
+        arr = await heapify(arr, N, largest, helperFunctions);
+    }
+
+    return Promise.resolve(arr);
+}
 
 export default Sorts;
