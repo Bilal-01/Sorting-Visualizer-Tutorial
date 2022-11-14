@@ -28,8 +28,6 @@ function Sorts(props)
         }
         else if(algo.algorithm === 'Quick'){    
             quickSort(localArr, helperFunctions);
-            // var sArray= quickSort(localArr,swap,animateColor);
-            // console.log(sArray);
         }
         else if(algo.algorithm === 'Merge'){
             mergeSort(localArr, 0, localArr.length-1, helperFunctions);
@@ -240,25 +238,6 @@ async function mergeSort(arr,l, r, helperFunctions){
     arr = await merge(arr,l,m,r, helperFunctions);
     return Promise.resolve(arr);
 }
-
-
-
-// async function quickSort(localArr,swap,animateColor) {
-
-// 	if(localArr.length <= 1){ return localArr }
-//     else{
-//         let left = [];
-//         let right = [];
-//         let newArray = [];
-//         let pivot = localArr.pop();
-    
-//         localArr.forEach(value => {
-//             value <= pivot ? left.push(value) : right.push(value);
-//         });
-    
-//         return newArray.concat(await quickSort(left), pivot,await quickSort(right));
-//     }
-// };
 
 async function heapSort(arr, helperFunctions)
 {
