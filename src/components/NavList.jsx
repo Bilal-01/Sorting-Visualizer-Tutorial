@@ -32,7 +32,6 @@ function NavList () {
             </button>
             <button className='nav-link' onClick={() => {
                 algo.setAlgorithm('Bucket');
-                algo.setIsFreqTable(true);
             }}>
                 Bucket Sort
             </button>

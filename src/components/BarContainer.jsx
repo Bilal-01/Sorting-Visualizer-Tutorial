@@ -17,11 +17,10 @@ function BarContainer(){
             //handleShow('hide');
         }
     }, [algo.algorithm]);
-
     return(
         <div className='home-container'>
             {
-               algo.arr.map((value, i) => (
+                algo.arr.map((value, i) => (
                     <div className={show} key = {i} style={{textAlign: 'center'}}>
                         <h3 style={{color: '#205375', marginBottom: '0px' }}>{value}</h3>
                         <Bars num = {value} index={i} />

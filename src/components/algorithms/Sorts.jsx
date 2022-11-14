@@ -12,6 +12,10 @@ function Sorts(props) {
         completeSorted,
         sleep,
         mergeAnimation,
+        handleFreqChange,
+        clearArr,
+        fillArr,
+        bucketAnimation,
     };
 
     useEffect(() => {
@@ -35,14 +39,14 @@ function Sorts(props) {
             heapSort(localArr, helperFunctions)
         }
         else if (algo.algorithm === 'Counting') {
-            countSort(localArr, )
+            countSort(localArr, 0, 10, helperFunctions )
         }
         else if (algo.algorithm === 'Radix') {
             radixsort(localArr, localArr.length, helperFunctions);
 
         }
         else if (algo.algorithm === 'Bucket') {
-
+            bucketSort(localArr, helperFunctions);
         }
     }, [algo.algorithm]);
 
@@ -92,6 +96,31 @@ function Sorts(props) {
 
     }
 
+    async function handleFreqChange(arr){
+        await sleep(500);
+        algo.setFreq([...arr]);
+        return Promise;
+    }
+
+    async function clearArr(){
+        let temp = [];
+        algo.setArr(temp);
+        return Promise.resolve(temp);
+    }
+
+    async function fillArr(arr){
+        algo.setArr([...arr]);
+        return Promise;
+    }
+
+    async function bucketAnimation(i, arr){
+        await sleep(500);
+        let temp = [...arr];
+        algo.setIndices([i, temp]);
+        console.log(algo.indices);
+        return Promise;
+
+    }
 
 }
 
@@ -323,7 +352,7 @@ async function getMax(arr, n) {
             mx = arr[i];
     return Promise.resolve(mx);
 }
-async function countSort(arr, n, exp, helperFunctions) {
+async function radixHelper(arr, n, exp, helperFunctions) {
     let output = new Array(n);
     let i;
     let count = new Array(10);
@@ -347,10 +376,97 @@ async function countSort(arr, n, exp, helperFunctions) {
 
     return Promise.resolve(arr);
 }
+
+
 async function radixsort(arr, n, helperFunctions) {
     let m = await getMax(arr, n);
     for (let exp = 1; Math.floor(m / exp) > 0; exp *= 10)
-        arr = await countSort(arr, n, exp, helperFunctions);
+        arr = await radixHelper(arr, n, exp, helperFunctions);
     console.log(arr);
 }
+
+
+async function countSort(arr, min, max, helperFunctions){
+
+        let i = min,
+            j = 0,
+            len = arr.length,
+            count = [];
+        for (i; i <= max; i++) {
+            count[i] = 0;
+        }
+        for (i = 0; i < len; i++) {
+            count[arr[i]] += 1;
+            await helperFunctions.animateColor([i]);
+            await helperFunctions.handleFreqChange(count);
+        }
+        arr = await helperFunctions.clearArr();
+        console.log(arr)
+
+        for (i = min; i <= max; i++) {
+            while (count[i] > 0) {
+                arr[j] = i;
+                j++;
+                count[i]--;
+                await helperFunctions.fillArr(arr);
+                console.log(arr);
+                await helperFunctions.animateColor([j]);
+            }
+        }
+        
+
+
+        return Promise.resolve(arr);
+}
+
+async function bucketSort(arr, helperFunctions){
+    if (arr.length === 0) {
+       return Promise.resolve(arr);
+    }
+    let i,
+    minValue = arr[0],
+    maxValue = arr[0],
+    bucketSize = 50;
+    arr.forEach(function (currentVal) {
+       if (currentVal < minValue) {
+          minValue = currentVal;
+       } else if (currentVal > maxValue) {
+          maxValue = currentVal;
+       }
+    })
+    let bucketCount = Math.floor((maxValue - minValue) / bucketSize) + 1;
+    let allBuckets = new Array(bucketCount);
+    for (i = 0; i < allBuckets.length; i++) {
+       allBuckets[i] = [];
+    }
+    arr.forEach(function (currentVal) {
+       allBuckets[Math.floor((currentVal - minValue) / bucketSize)].push(currentVal);
+    });
+    arr.length = 0;
+    for(let i=0; i<bucketCount; i++){
+        await helperFunctions.animateColor([i, allBuckets[i]]);
+        allBuckets[i] = await bucketInsertion(allBuckets[i], helperFunctions);
+        for(let j=0; j<allBuckets[i].length; j++){
+            arr.push(allBuckets[i][j]);
+        }
+    }
+
+    return Promise.resolve(arr);
+}
+
+async function bucketInsertion(arr, helperFunctions){
+    let length = arr.length;
+    let i, j;
+    for(i = 1; i < length; i++) {
+       let temp = arr[i];
+       for(j = i - 1; j >= 0 && arr[j] > temp; j--) {
+           arr[j+1] = arr[j];
+        }
+        arr[j+1] = temp;
+    }
+    return Promise.resolve(arr);
+ };
+
+
+
 export default Sorts;
