@@ -24,13 +24,22 @@ function NavList () {
             <button className='nav-link' onClick={() => algo.setAlgorithm('Quick')}>
                 Quick Sort
             </button>
-            <button className='nav-link' onClick={() => algo.setAlgorithm('Radix')}>
+            <button className='nav-link' onClick={() => {
+                algo.setAlgorithm('Radix');
+                algo.setIsFreqTable(true);
+            }}>
                 Radix Sort
             </button>
-            <button className='nav-link' onClick={() => algo.setAlgorithm('Bucket')}>
+            <button className='nav-link' onClick={() => {
+                algo.setAlgorithm('Bucket');
+                algo.setIsFreqTable(true);
+            }}>
                 Bucket Sort
             </button>
-            <button className='nav-link' onClick={() => algo.setAlgorithm('Counting')}>
+            <button className='nav-link' onClick={() => {
+                algo.setAlgorithm('Counting');
+                algo.setIsFreqTable(true);
+            }}>
                 Counting Sort
             </button>
             <button className='nav-link' onClick={() => algo.setAlgorithm('7.4.5')}>

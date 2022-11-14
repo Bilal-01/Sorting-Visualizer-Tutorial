@@ -12,6 +12,11 @@ function Bars(props){
 
 
     function getHeight(){
+
+        if(Math.max.apply(null, algo.arr) <= 10){
+            return props.num*30;
+        }
+
         if (props.num < 100){
             return  props.num + 20;
         }
@@ -19,11 +24,11 @@ function Bars(props){
             return props.num + 20;
         else if(props.num < 300)
             return props.num + 20;
-        else if(props.num < 400)
+        else if(props.num <= 400)
             return props.num + 20;
-        else if(props.num <= 500)
-            return props.num;
     }
+
+
 
     function setColor(){
         for(let i=0; i<algo.arr.length; i++){

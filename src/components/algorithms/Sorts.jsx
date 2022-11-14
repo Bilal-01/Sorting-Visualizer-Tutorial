@@ -1,48 +1,48 @@
-import React, {useContext, useEffect, useState} from 'react';
-import AlgoContext  from '../AlgoContext';
+import React, { useContext, useEffect, useState } from 'react';
+import AlgoContext from '../AlgoContext';
 
 
-function Sorts(props)
-{
+function Sorts(props) {
     const algo = useContext(AlgoContext);
-    
+
 
     const helperFunctions = {
-        swap, 
-        animateColor, 
+        swap,
+        animateColor,
         completeSorted,
         sleep,
         mergeAnimation,
     };
-    
+
     useEffect(() => {
         algo.setIsSorted(false);
         const originalArray = [...algo.inputArr];
         algo.setArr(originalArray);
-        let localArr  = [...originalArray];
-        if(algo.algorithm === 'Bubble'){
+        let localArr = [...originalArray];
+        if (algo.algorithm === 'Bubble') {
             bubbleSort(localArr, helperFunctions);
         }
-        else if(algo.algorithm === 'Insertion'){
+        else if (algo.algorithm === 'Insertion') {
             insertionSort(localArr, helperFunctions);
         }
-        else if(algo.algorithm === 'Quick'){    
-            quickSort(localArr, helperFunctions);
+        else if (algo.algorithm === 'Quick') {
+            quickSort(localArr, 0, localArr.length - 1, helperFunctions);
         }
-        else if(algo.algorithm === 'Merge'){
-            mergeSort(localArr, 0, localArr.length-1, helperFunctions);
+        else if (algo.algorithm === 'Merge') {
+            mergeSort(localArr, 0, localArr.length - 1, helperFunctions);
         }
-        else if(algo.algorithm === 'Heap'){
+        else if (algo.algorithm === 'Heap') {
             heapSort(localArr, helperFunctions)
         }
-        else if(algo.algorithm === 'Counting'){
-            
+        else if (algo.algorithm === 'Counting') {
+            countSort(localArr, )
         }
-        else if(algo.algorithm === 'Radix'){
-            
+        else if (algo.algorithm === 'Radix') {
+            radixsort(localArr, localArr.length, helperFunctions);
+
         }
-        else if(algo.algorithm === 'Bucket'){
-            
+        else if (algo.algorithm === 'Bucket') {
+
         }
     }, [algo.algorithm]);
 
@@ -55,7 +55,7 @@ function Sorts(props)
         return new Promise((resolve) => setTimeout(resolve, millis));
     }
 
-    async function animateColor(arr){
+    async function animateColor(arr) {
         await sleep(1000);
         let indices = [...arr];
         algo.setIndices(indices);
@@ -63,7 +63,7 @@ function Sorts(props)
 
     }
 
-    async function swap(arr, i, j){
+    async function swap(arr, i, j) {
         let tempArr = [...arr];
         var temp = tempArr[i]
         tempArr[i] = tempArr[j]
@@ -73,18 +73,18 @@ function Sorts(props)
         return Promise.resolve(tempArr);
     }
 
-    async function completeSorted(){
+    async function completeSorted() {
         algo.setIsSorted(true);
         return Promise;
     }
 
-    return(
+    return (
         props.code.map((line, i) => {
             return <p key={i}>{line}</p>
         })
     );
 
-    async function mergeAnimation(arr){
+    async function mergeAnimation(arr) {
         let tempArr = [...arr];
         await sleep(1000);
         algo.setArr(tempArr);
@@ -95,107 +95,131 @@ function Sorts(props)
 
 }
 
-async function bubbleSort(localArr, helperFunctions){
+async function bubbleSort(localArr, helperFunctions) {
     await helperFunctions.sleep(1000);
-    for(var i = 0; i < localArr.length; i++){
-        for(var j = 0; j < ( localArr.length - i -1 ); j++){
-            await helperFunctions.animateColor([j, j+1]);
-            if(localArr[j] > localArr[j+1]){
-                localArr = await helperFunctions.swap(localArr, j, j+1);
+    for (var i = 0; i < localArr.length; i++) {
+        for (var j = 0; j < (localArr.length - i - 1); j++) {
+            await helperFunctions.animateColor([j, j + 1]);
+            if (localArr[j] > localArr[j + 1]) {
+                localArr = await helperFunctions.swap(localArr, j, j + 1);
             }
         }
     }
     await helperFunctions.completeSorted();
 }
 
-async function insertionSort(localArr, helperFunctions){
+async function insertionSort(localArr, helperFunctions) {
     await helperFunctions.sleep(1000);
-    let i, j; 
-    for (i = 1; i < localArr.length; i++)
-    { 
-        j = i; 
-        while (j >= 0 && localArr[j] < localArr[j-1])
-        { 
-            await helperFunctions.animateColor([j, j-1]);
-            localArr = await helperFunctions.swap(localArr, j, j-1);
-            j = j-1;
-        } 
+    let i, j;
+    for (i = 1; i < localArr.length; i++) {
+        j = i;
+        while (j >= 0 && localArr[j] < localArr[j - 1]) {
+            await helperFunctions.animateColor([j, j - 1]);
+            localArr = await helperFunctions.swap(localArr, j, j - 1);
+            j = j - 1;
+        }
     }
     await helperFunctions.completeSorted();
 
 }
 
-async function partition(localArr, low, high,helperFunctions) {
+// async function partition(localArr, low, high,helperFunctions) {
+//     let pivot = localArr[high];
+//     let i = (low);
+//     for (let j = low; j < high; j++) {
+//         if (localArr[j] < pivot) {
+//             await helperFunctions.animateColor([j, i]);
+//             localArr = await helperFunctions.swap(localArr, j, i);
+//             console.log(localArr);
+//             i++;
+//         }
+//     }
+//     await helperFunctions.animateColor([i, high]);
+//     localArr = await helperFunctions.swap(localArr, i, high);
+//     return Promise.resolve([localArr, i]);
+
+// }
+
+// async function quickSort(arr, helperFunctions)
+// {
+//     let stack = [];
+//     stack.push(0);
+//     stack.push(arr.length - 1);
+//     let pivotIndex;
+
+//     while(stack[stack.length - 1] >= 0){
+//     	let end = stack.pop();
+//         let start = stack.pop();
+
+//         [arr, pivotIndex] = await partition(arr, start, end, helperFunctions);
+//         console.log(arr);
+//         if (pivotIndex - 1 > start){
+//         	stack.push(start);
+//             stack.push(pivotIndex - 1);
+// 		}
+//         if (pivotIndex + 1 < end){
+//         	stack.push(pivotIndex + 1);
+//             stack.push(end);
+//         }
+//     }
+//     await helperFunctions.completeSorted();    
+// }
+async function partition(localArr, low, high, helperFunctions) {
+
     let pivot = localArr[high];
-    let i = (low);
-    for (let j = low; j < high; j++) {
+    let i = (low - 1);
+    for (let j = low; j <= high - 1; j++) {
         if (localArr[j] < pivot) {
-            await helperFunctions.animateColor([j, i]);
-            localArr = await helperFunctions.swap(localArr, j, i);
-            console.log(localArr);
             i++;
+            await helperFunctions.animateColor([i, j]);
+            localArr = await helperFunctions.swap(localArr, i, j);
         }
     }
-    await helperFunctions.animateColor([i, high]);
-    localArr = await helperFunctions.swap(localArr, i, high);
-    return Promise.resolve([localArr, i]);
+    await helperFunctions.animateColor([i + 1, high]);
+    localArr = await helperFunctions.swap(localArr, i + 1, high);
+    return Promise.resolve([localArr, i + 1]);
 
 }
-
-async function quickSort(arr, helperFunctions)
-{
-    let stack = [];
-    stack.push(0);
-    stack.push(arr.length - 1);
-    let pivotIndex;
-    
-    while(stack[stack.length - 1] >= 0){
-    	let end = stack.pop();
-        let start = stack.pop();
-        
-        [arr, pivotIndex] = await partition(arr, start, end, helperFunctions);
-        console.log(arr);
-        if (pivotIndex - 1 > start){
-        	stack.push(start);
-            stack.push(pivotIndex - 1);
-		}
-        if (pivotIndex + 1 < end){
-        	stack.push(pivotIndex + 1);
-            stack.push(end);
-        }
+async function quickSort(localArr, low, high, helperFunctions) {
+    if (low < high) {
+        let pi;
+        [localArr, pi] = await partition(localArr, low, high, helperFunctions);
+        localArr = await quickSort(localArr, low, pi - 1, helperFunctions);
+        localArr = await quickSort(localArr, pi + 1, high, helperFunctions);
     }
-    await helperFunctions.completeSorted();    
+    else {
+        if (Math.min.apply(null, localArr) === localArr[0] && Math.max.apply(null, localArr) == localArr[localArr.length - 1]) { await helperFunctions.completeSorted(); }
+    }
+    return Promise.resolve(localArr);
 }
 
-async function merge(arr, l, m, r, helperFunctions)
-{
+async function merge(arr, l, m, r, helperFunctions) {
     let n1 = m - l + 1;
     let n2 = r - m;
     console.log(n1 + " " + n2);
     let L = new Array(n1);
     let R = new Array(n2);
     let animations = [];
-    
+
     let i = 0;
     let j = 0;
     console.log(arr);
-    if(n1 !== 0){
-        for (i = 0; i < n1; i++)
-        {
+    if (n1 !== 0) {
+        for (i = 0; i < n1; i++) {
             L[i] = arr[l + i];
-            animations[i] = l+i;
+            animations[i] = l + i;
         }
     }
-    if(n2 !== 0){
-        for (j = 0; j < n2; j++){
+    if (n2 !== 0) {
+        for (j = 0; j < n2; j++) {
             R[j] = arr[m + 1 + j];
-            animations[n1+j] = m+1+j
+            animations[n1 + j] = m + 1 + j
         }
     }
     await helperFunctions.animateColor(animations);
-        
-    i=0;
-    j=0;    
+
+    i = 0;
+    j = 0;
     let k = l;
 
     while (i < n1 && j < n2) {
@@ -227,20 +251,41 @@ async function merge(arr, l, m, r, helperFunctions)
     console.log(arr);
     return Promise.resolve(arr);
 }
- 
-async function mergeSort(arr,l, r, helperFunctions){
-    if(l>=r){ 
+
+async function mergeSort(arr, l, r, helperFunctions) {
+    if (l >= r) {
         return Promise.resolve(arr);
     }
-    var m =l+ parseInt((r-l)/2);
-    arr = await mergeSort(arr,l,m, helperFunctions);
-    arr = await mergeSort(arr,m+1,r, helperFunctions);
-    arr = await merge(arr,l,m,r, helperFunctions);
+    var m = l + parseInt((r - l) / 2);
+    arr = await mergeSort(arr, l, m, helperFunctions);
+    arr = await mergeSort(arr, m + 1, r, helperFunctions);
+    arr = await merge(arr, l, m, r, helperFunctions);
+    // if (Math.min.apply(null, arr) === arr[0] || Math.max.apply(null, arr) === arr[arr.length - 1]) 
+    //     {   console.log('true');
+    //         await helperFunctions.completeSorted(); }
     return Promise.resolve(arr);
 }
 
-async function heapSort(arr, helperFunctions)
-{
+
+
+// async function quickSort(localArr,swap,animateColor) {
+
+// 	if(localArr.length <= 1){ return localArr }
+//     else{
+//         let left = [];
+//         let right = [];
+//         let newArray = [];
+//         let pivot = localArr.pop();
+
+//         localArr.forEach(value => {
+//             value <= pivot ? left.push(value) : right.push(value);
+//         });
+
+//         return newArray.concat(await quickSort(left), pivot,await quickSort(right));
+//     }
+// };
+
+async function heapSort(arr, helperFunctions) {
     var N = arr.length;
     for (var i = Math.floor(N / 2) - 1; i >= 0; i--)
         arr = await heapify(arr, N, i, helperFunctions);
@@ -251,18 +296,17 @@ async function heapSort(arr, helperFunctions)
     }
     await helperFunctions.completeSorted();
 }
-async function heapify(arr, N, i, helperFunctions)
-{
-    var largest = i; 
-    var l = 2 * i + 1; 
-    var r = 2 * i + 2; 
+async function heapify(arr, N, i, helperFunctions) {
+    var largest = i;
+    var l = 2 * i + 1;
+    var r = 2 * i + 2;
 
     if (l < N && arr[l] > arr[largest])
         largest = l;
 
     if (r < N && arr[r] > arr[largest])
         largest = r;
-        
+
     if (largest != i) {
         await helperFunctions.animateColor([i, largest]);
         arr = await helperFunctions.swap(arr, i, largest);
@@ -272,4 +316,41 @@ async function heapify(arr, N, i, helperFunctions)
     return Promise.resolve(arr);
 }
 
+async function getMax(arr, n) {
+    let mx = arr[0];
+    for (let i = 1; i < n; i++)
+        if (arr[i] > mx)
+            mx = arr[i];
+    return Promise.resolve(mx);
+}
+async function countSort(arr, n, exp, helperFunctions) {
+    let output = new Array(n);
+    let i;
+    let count = new Array(10);
+    for (let i = 0; i < 10; i++)
+        count[i] = 0;
+    for (i = 0; i < n; i++)
+        count[Math.floor(arr[i] / exp) % 10]++;
+    for (i = 1; i < 10; i++)
+        count[i] += count[i - 1];
+    for (i = n - 1; i >= 0; i--) {
+
+        await helperFunctions.animateColor([count[Math.floor(arr[i] / exp) % 10] - 1, i]);
+        arr = await helperFunctions.swap(arr, [count[Math.floor(arr[i] / exp) % 10] - 1], i);
+        output[count[Math.floor(arr[i] / exp) % 10] - 1] = arr[i];
+        console.log(arr)
+        console.log(count[Math.floor(arr[i] / exp) % 10] - 1)
+        count[Math.floor(arr[i] / exp) % 10]--;
+    }
+    for (i = 0; i < n; i++)
+        arr[i] = output[i];
+
+    return Promise.resolve(arr);
+}
+async function radixsort(arr, n, helperFunctions) {
+    let m = await getMax(arr, n);
+    for (let exp = 1; Math.floor(m / exp) > 0; exp *= 10)
+        arr = await countSort(arr, n, exp, helperFunctions);
+    console.log(arr);
+}
 export default Sorts;
