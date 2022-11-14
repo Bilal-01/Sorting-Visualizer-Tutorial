@@ -5,3 +5,12 @@
     align-items: center;
     border: 1px solid black;
 }
+
+.active{
+    display: block;
+    transition: 1s all;
+}
+
+.hide{
+    display: none;
+}

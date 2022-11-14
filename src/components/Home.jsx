@@ -1,7 +1,9 @@
-import React  from 'react';
+import React, { useContext }  from 'react';
 import FileUpload from './FileUpload';
 import Algorithms from './Algorithms';
 import BarContainer from './BarContainer';
+import AlgoContext from './AlgoContext';
+import FreqTable from './FreqTable';
 import '../css/home.css';
 
 /*
@@ -12,10 +14,11 @@ RESTRICTIONS
 */
 
 function Home() {
-
+    const algo = useContext(AlgoContext);
     return(
         <>
         <div className='home'>
+            {algo.isFreqTable ? <FreqTable />:null}
             <div className ='rowC'>
                 <BarContainer />
                 <div>
