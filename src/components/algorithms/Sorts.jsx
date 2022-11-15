@@ -106,7 +106,6 @@ function Sorts(props) {
     async function clearArr() {
         let temp = [];
         algo.setArr([]);
-        console.log("Clear ARR: " + algo.arr);
         return Promise.resolve(temp);
     }
 
@@ -115,18 +114,14 @@ function Sorts(props) {
         return Promise;
     }
 
-    async function BfillArr(arr,i) {
-        console.log("i " + i);
-        if(i===0)
-        {let temp = [];}
-        else
-        {let temp=[...algo.arr];
-            let temp2 = [...arr];
-        console.log("temp" + temp);
-        console.log("temp2" + temp2);
+    async function BfillArr(arr) {
+        let temp=[...algo.arr];
+        let temp2 = [...arr];
+        console.log("temp; " + temp);
+        console.log("temp2: " + temp2);
         let final = temp2.concat(temp);
         algo.setArr(final);
-        console.log("final" + final);}
+        console.log("final" + final);
         return Promise;
     }
 
@@ -266,9 +261,6 @@ async function mergeSort(arr, l, r, helperFunctions) {
     arr = await mergeSort(arr, l, m, helperFunctions);
     arr = await mergeSort(arr, m + 1, r, helperFunctions);
     arr = await merge(arr, l, m, r, helperFunctions);
-    // if (Math.min.apply(null, arr) === arr[0] || Math.max.apply(null, arr) === arr[arr.length - 1]) 
-    //     {   console.log('true');
-    //         await helperFunctions.completeSorted(); }
     return Promise.resolve(arr);
 }
 
@@ -409,23 +401,29 @@ async function bucketSort(arr, helperFunctions) {
     });
     arr.length = 0;
     for (let i = 0; i < bucketCount; i++) {
-        // console.log("Bucket Value: " + i +" Index = " +BucketIndex[i]);  
-    }
-    for (let i = 0; i < bucketCount; i++) {
-        await helperFunctions.animateColor(BucketIndex[i]);
+        if(BucketIndex[i].length !== 0){
+            await helperFunctions.animateColor([i, ...BucketIndex[i]]);
+        }
+        await helperFunctions.sleep(1000);
     }
     await helperFunctions.sleep(1000);
-    await helperFunctions.clearArr();
-    console.log("ARRAY= " + arr);
+    // arr = await helperFunctions.clearArr();
+    let k=0;
     for (let i = 0; i < bucketCount; i++) {
+        let tempIndex = [];
         allBuckets[i] = await bucketInsertion(allBuckets[i], helperFunctions);
         for (let j = 0; j < allBuckets[i].length; j++) {
-            // console.log(allBuckets[i][j]);
             arr.push(allBuckets[i][j]);
+            tempIndex.push(k);
+            k++;
         }
-        await helperFunctions.BfillArr(allBuckets[i],i);
+        console.log(arr);
+        console.log(tempIndex);
+        await helperFunctions.animateColor([i, ...tempIndex]);
+        await helperFunctions.fillArr(arr);
+        await helperFunctions.sleep(1000);
     }
-
+    await helperFunctions.completeSorted();
     return Promise.resolve(arr);
 }
 
