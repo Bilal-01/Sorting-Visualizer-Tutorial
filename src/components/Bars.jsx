@@ -31,16 +31,16 @@ function Bars(props){
 
 
     function setColor(){
-        if(algo.algorithm === 'Bucket'){
+        if(algo.algorithm === 'Bucket' && !algo.isSorted){
             if(algo.indices[0] === 0){
-                for(let i=0; i<algo.indices.length; i++){
+                for(let i=1; i<algo.indices.length; i++){
                     if(props.index === algo.indices[i]){
                         return '797B84';
                     }
                 }
             }      
             if(algo.indices[0] === 1){
-                for(let i=0; i<algo.indices.length; i++){
+                for(let i=1; i<algo.indices.length; i++){
                     if(props.index === algo.indices[i]){
                         return '112B3C';
                     }
@@ -48,21 +48,21 @@ function Bars(props){
                 
             }
             if(algo.indices[0] === 2){
-                for(let i=0; i<algo.indices.length; i++){
+                for(let i=1; i<algo.indices.length; i++){
                     if(props.index === algo.indices[i]){
                         return 'D7BFCC';
                     }
                 }   
             }
             if(algo.indices[0] === 3){
-                for(let i=0; i<algo.indices.length; i++){
+                for(let i=1; i<algo.indices.length; i++){
                     if(props.index === algo.indices[i]){
                         return 'EDD2E0';
                     }
                 }   
             }
             if(algo.indices[0] === 4){
-                for(let i=0; i<algo.indices.length; i++){
+                for(let i=1; i<algo.indices.length; i++){
                     if(props.index === algo.indices[i]){
                         return 'EDBBB4';
                     }
@@ -70,21 +70,21 @@ function Bars(props){
                 
             }
             if(algo.indices[0] === 5){
-                for(let i=0; i<algo.indices.length; i++){
+                for(let i=1; i<algo.indices.length; i++){
                     if(props.index === algo.indices[i]){
                         return 'E4B3B9';
                     }
                 }   
             }
             if(algo.indices[0] === 6){
-                for(let i=0; i<algo.indices.length; i++){
+                for(let i=1; i<algo.indices.length; i++){
                     if(props.index === algo.indices[i]){
                         return 'DBABBE';
                     }
                 }   
             }
             if(algo.indices[0] === 7){
-                for(let i=0; i<algo.indices.length; i++){
+                for(let i=1; i<algo.indices.length; i++){
                     if(props.index === algo.indices[i]){
                         return 'BAA1A7';
                     }
