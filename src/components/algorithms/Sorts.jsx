@@ -49,6 +49,9 @@ function Sorts(props) {
         else if (algo.algorithm === 'Bucket') {
             bucketSort(localArr, helperFunctions);
         }
+        else if (algo.algorithm === '7.4.5') {
+            Sort_book1(localArr, 0, 15, 4, helperFunctions);
+        }
     }, [algo.algorithm]);
 
     useEffect(() => {
@@ -115,18 +118,18 @@ function Sorts(props) {
         return Promise;
     }
 
-    async function BfillArr(arr,i) {
+    async function BfillArr(arr, i) {
         console.log("i " + i);
-        if(i===0)
-        {let temp = [];}
-        else
-        {let temp=[...algo.arr];
+        if (i === 0) { let temp = []; }
+        else {
+            let temp = [...algo.arr];
             let temp2 = [...arr];
-        console.log("temp" + temp);
-        console.log("temp2" + temp2);
-        let final = temp2.concat(temp);
-        algo.setArr(final);
-        console.log("final" + final);}
+            console.log("temp" + temp);
+            console.log("temp2" + temp2);
+            let final = temp2.concat(temp);
+            algo.setArr(final);
+            console.log("final" + final);
+        }
         return Promise;
     }
 
@@ -423,7 +426,7 @@ async function bucketSort(arr, helperFunctions) {
             // console.log(allBuckets[i][j]);
             arr.push(allBuckets[i][j]);
         }
-        await helperFunctions.BfillArr(allBuckets[i],i);
+        await helperFunctions.BfillArr(allBuckets[i], i);
     }
 
     return Promise.resolve(arr);
@@ -443,6 +446,38 @@ async function bucketInsertion(arr, helperFunctions) {
     return Promise.resolve(arr);
 };
 
+async function Sort_book1(localArr, p, r, K, helperFunctions) {
 
+    localArr = await limited_quickSort(localArr, p, r, K, helperFunctions);
+    console.log("Limited QS " + localArr);
+    // localArr = await modified_insertionSort(localArr, p, r, helperFunctions);
+    return Promise;
+}
+
+async function limited_quickSort(localArr,p,r,K,helperFunctions)
+{
+    if(r-p > K)
+    {
+        let q = await partition(localArr,p,r,helperFunctions);
+        await limited_quickSort(localArr,p,q,K,helperFunctions);
+        await limited_quickSort(localArr,q+1,r,K,helperFunctions);
+    }
+    return Promise.resolve(localArr);
+}
+
+async function modified_insertionSort(localArr,p,r, helperFunctions) {
+    await helperFunctions.sleep(1000);
+    let i, j;
+    for (i = p+1; i < r; i++) {
+        j = i;
+        while (j >= 0 && localArr[j] < localArr[j - 1]) {
+            await helperFunctions.animateColor([j, j - 1]);
+            localArr = await helperFunctions.swap(localArr, j, j - 1);
+            j = j - 1;
+        }
+    }
+    // await helperFunctions.completeSorted();
+
+}
 
 export default Sorts;
