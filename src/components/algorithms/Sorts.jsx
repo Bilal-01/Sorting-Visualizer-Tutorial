@@ -50,7 +50,7 @@ function Sorts(props) {
             bucketSort(localArr, helperFunctions);
         }
         else if (algo.algorithm === 'Modified Quicksort') {
-            Sort_book1(localArr, 0, 15, 4, helperFunctions);
+            Sort_book1(localArr, 0, 14, 4, helperFunctions);
         }
         else if (algo.algorithm === 'Modified Countsort') {
             modifiedCountSort(localArr, 0, 10, 3, 8, helperFunctions)
@@ -451,7 +451,7 @@ async function Sort_book1(localArr, p, r, K, helperFunctions) {
 
     localArr = await limited_quickSort(localArr, p, r, K, helperFunctions);
     console.log("Limited QS " + localArr);
-    // localArr = await modified_insertionSort(localArr, p, r, helperFunctions);
+    localArr = await modified_insertionSort(localArr, p, r, helperFunctions);
     return Promise;
 }
 
