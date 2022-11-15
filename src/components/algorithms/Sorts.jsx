@@ -49,8 +49,11 @@ function Sorts(props) {
         else if (algo.algorithm === 'Bucket') {
             bucketSort(localArr, helperFunctions);
         }
-        else if (algo.algorithm === '7.4.5') {
+        else if (algo.algorithm === 'Modified Quicksort') {
             Sort_book1(localArr, 0, 15, 4, helperFunctions);
+        }
+        else if (algo.algorithm === 'Modified Countsort') {
+            modifiedCountSort(localArr, 0, 10, 3, 8, helperFunctions)
         }
     }, [algo.algorithm]);
 
@@ -476,6 +479,40 @@ async function modified_insertionSort(localArr,p,r, helperFunctions) {
     }
     // await helperFunctions.completeSorted();
 
+}
+
+async function modifiedCountSort(arr, min, max, a, b, helperFunctions){
+    let i = min,
+    j = 0,
+    len = arr.length,
+    count = [],
+    auxArr = [];
+    for (i; i <= max; i++) {
+        count[i] = 0;
+        auxArr[i] = 0;
+    }
+    for (i = 0; i < len; i++) {
+        count[arr[i]] += 1;
+        //await helperFunctions.animateColor([i]);
+        await helperFunctions.handleFreqChange(count);
+    }
+    for (i = min; i <= max; i++) {
+        if(i === 0){
+            auxArr[i] = count[i];
+        }
+        else{
+            auxArr[i] = auxArr[i-1] + count[i]
+        }
+    }
+    // arr = await helperFunctions.clearArr();
+    console.log(auxArr);
+    console.log(count);
+    let numOfIntegers=auxArr[b] - auxArr[a-1];
+    console.log("Numbers between " + a + " and " + b + " are : " + numOfIntegers)
+    
+
+
+    return Promise.resolve(count);
 }
 
 export default Sorts;

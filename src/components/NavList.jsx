@@ -41,10 +41,13 @@ function NavList () {
             }}>
                 Counting Sort
             </button>
-            <button className='nav-link' onClick={() => algo.setAlgorithm('7.4.5')}>
+            <button className='nav-link' onClick={() => algo.setAlgorithm('Modified Quicksort')}>
                7.4.5 Sort
             </button>
-            <button className='nav-link' onClick={() => algo.setAlgorithm('8.2.4')}>
+            <button className='nav-link' onClick={() => {
+                algo.setAlgorithm('Modified Countsort');
+                algo.setIsFreqTable(true);
+            }}>
                 8.2.4 Sort
             </button>
         </div>
