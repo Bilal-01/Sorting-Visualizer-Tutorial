@@ -32,11 +32,9 @@ function Bars(props){
 
     function setColor(){
         if(algo.algorithm === 'Bucket'){
-            console.log("Indices: " + algo.indices);
             if(algo.indices[0] === 0){
                 for(let i=0; i<algo.indices.length; i++){
                     if(props.index === algo.indices[i]){
-                        console.log(algo.indices[i]);
                         return '797B84';
                     }
                 }
