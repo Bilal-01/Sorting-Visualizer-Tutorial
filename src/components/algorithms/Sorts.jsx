@@ -459,9 +459,10 @@ async function limited_quickSort(localArr,p,r,K,helperFunctions)
 {
     if(r-p > K)
     {
-        let q = await partition(localArr,p,r,helperFunctions);
-        await limited_quickSort(localArr,p,q,K,helperFunctions);
-        await limited_quickSort(localArr,q+1,r,K,helperFunctions);
+        let q;
+        [localArr, q] = await partition(localArr,p,r,helperFunctions);
+        localArr = await limited_quickSort(localArr,p,q-1,K,helperFunctions);
+        localArr = await limited_quickSort(localArr,q+1,r,K,helperFunctions);
     }
     return Promise.resolve(localArr);
 }
