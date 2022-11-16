@@ -35,14 +35,14 @@ function Bars(props) {
             if (algo.indices[0] === 0) {
                 for (let i = 1; i < algo.indices.length; i++) {
                     if (props.index === algo.indices[i]) {
-                        return '797B84';
+                        return 'FBAB50';
                     }
                 }
             }
             if (algo.indices[0] === 1) {
                 for (let i = 1; i < algo.indices.length; i++) {
                     if (props.index === algo.indices[i]) {
-                        return '112B3C';
+                        return 'FFB703';
                     }
                 }
 
@@ -50,21 +50,21 @@ function Bars(props) {
             if (algo.indices[0] === 2) {
                 for (let i = 1; i < algo.indices.length; i++) {
                     if (props.index === algo.indices[i]) {
-                        return 'D7BFCC';
+                        return '817425';
                     }
                 }
             }
             if (algo.indices[0] === 3) {
                 for (let i = 1; i < algo.indices.length; i++) {
                     if (props.index === algo.indices[i]) {
-                        return 'EDD2E0';
+                        return '126782';
                     }
                 }
             }
             if (algo.indices[0] === 4) {
                 for (let i = 1; i < algo.indices.length; i++) {
                     if (props.index === algo.indices[i]) {
-                        return 'EDBBB4';
+                        return '219EBC';
                     }
                 }
 
@@ -72,26 +72,26 @@ function Bars(props) {
             if (algo.indices[0] === 5) {
                 for (let i = 1; i < algo.indices.length; i++) {
                     if (props.index === algo.indices[i]) {
-                        return 'E4B3B9';
+                        return '023047';
                     }
                 }
             }
             if (algo.indices[0] === 6) {
                 for (let i = 1; i < algo.indices.length; i++) {
                     if (props.index === algo.indices[i]) {
-                        return 'DBABBE';
+                        return '7F7A59';
                     }
                 }
             }
             if (algo.indices[0] === 7) {
                 for (let i = 1; i < algo.indices.length; i++) {
                     if (props.index === algo.indices[i]) {
-                        return 'BAA1A7';
+                        return 'EBD4A4';
                     }
                 }
             }
         }
-        if (algo.algorithm === 'Modified Quicksort' && !algo.isSorted) {
+        else if (algo.algorithm === 'Modified Quicksort' && !algo.isSorted) {
             console.log("index= " + algo.indices[0]);
             if (algo.indices[0] === 1) {
                 for (let i = 1; i < algo.indices.length; i++) {

@@ -211,7 +211,7 @@ async function merge(arr, l, m, r, helperFunctions) {
     let L = new Array(n1);
     let R = new Array(n2);
     let animations = [];
-
+    
     let i = 0;
     let j = 0;
     console.log(arr);
@@ -228,7 +228,7 @@ async function merge(arr, l, m, r, helperFunctions) {
         }
     }
     await helperFunctions.animateColor(animations);
-
+    
     i = 0;
     j = 0;
     let k = l;
@@ -244,27 +244,28 @@ async function merge(arr, l, m, r, helperFunctions) {
         }
         k++;
     }
-
+    
     while (i < n1) {
         arr[k] = L[i];
         i++;
         k++;
     }
-
+    
     while (j < n2) {
         arr[k] = R[j];
         j++;
         k++;
     }
     await helperFunctions.mergeAnimation(arr);
-
-
+    
+    
     console.log(arr);
     return Promise.resolve(arr);
 }
 
 async function mergeSort(arr, l, r, helperFunctions) {
     if (l >= r) {
+        console.log("MERGE: "+ arr);
         return Promise.resolve(arr);
     }
     var m = l + parseInt((r - l) / 2);
@@ -417,7 +418,6 @@ async function bucketSort(arr, helperFunctions) {
         await helperFunctions.sleep(1000);
     }
     await helperFunctions.sleep(1000);
-    // arr = await helperFunctions.clearArr();
     let k = 0;
     for (let i = 0; i < bucketCount; i++) {
         let tempIndex = [];
@@ -524,7 +524,6 @@ async function modifiedCountSort(arr, min, max, a, b, helperFunctions) {
     await helperFunctions.fillArr(X);
     await helperFunctions.removeFreqTable();
     await helperFunctions.countHandle(a,b,numOfIntegers);
-    // console.log("Numbers between " + a + " and " + b + " are : " + numOfIntegers)
     return Promise.resolve(count);
 }
 

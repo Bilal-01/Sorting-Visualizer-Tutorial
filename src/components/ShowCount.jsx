@@ -8,7 +8,7 @@ function ShowCount()
         fontWeight: 'lighter',
         fontSize: '3rem',
         width: '50%',
-        margin: '10px 20px'
+        padding: '5px 20px'
     }
     return (
         <div style={styles}>
