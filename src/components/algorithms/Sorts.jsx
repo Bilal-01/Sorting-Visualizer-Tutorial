@@ -15,8 +15,9 @@ function Sorts(props) {
         handleFreqChange,
         clearArr,
         fillArr,
-        BfillArr,
         bucketAnimation,
+        removeFreqTable,
+        countHandle,
     };
 
     useEffect(() => {
@@ -109,6 +110,13 @@ function Sorts(props) {
         return Promise;
     }
 
+    async function removeFreqTable()
+    {
+        await sleep(500);
+        algo.setIsFreqTable(false);
+        return Promise;
+    }
+
     async function clearArr() {
         let temp = [];
         algo.setArr([]);
@@ -120,16 +128,6 @@ function Sorts(props) {
         return Promise;
     }
 
-    async function BfillArr(arr) {
-        let temp=[...algo.arr];
-        let temp2 = [...arr];
-        console.log("temp; " + temp);
-        console.log("temp2: " + temp2);
-        let final = temp2.concat(temp);
-        algo.setArr(final);
-        console.log("final" + final);
-        return Promise;
-    }
 
     async function bucketAnimation(i, arr) {
         await sleep(500);
@@ -138,6 +136,12 @@ function Sorts(props) {
         console.log(algo.indices);
         return Promise;
 
+    }
+
+    async function countHandle(a,b,count)
+    {
+        algo.setCount([a,b,count]);
+        return Promise;
     }
 
 }
@@ -178,11 +182,11 @@ async function partition(localArr, low, high, helperFunctions) {
     for (let j = low; j <= high - 1; j++) {
         if (localArr[j] < pivot) {
             i++;
-            await helperFunctions.animateColor([i, j]);
+            await helperFunctions.animateColor([0, i, j]);
             localArr = await helperFunctions.swap(localArr, i, j);
         }
     }
-    await helperFunctions.animateColor([i + 1, high]);
+    await helperFunctions.animateColor([0, i + 1, high]);
     localArr = await helperFunctions.swap(localArr, i + 1, high);
     return Promise.resolve([localArr, i + 1]);
 
@@ -407,14 +411,14 @@ async function bucketSort(arr, helperFunctions) {
     });
     arr.length = 0;
     for (let i = 0; i < bucketCount; i++) {
-        if(BucketIndex[i].length !== 0){
+        if (BucketIndex[i].length !== 0) {
             await helperFunctions.animateColor([i, ...BucketIndex[i]]);
         }
         await helperFunctions.sleep(1000);
     }
     await helperFunctions.sleep(1000);
     // arr = await helperFunctions.clearArr();
-    let k=0;
+    let k = 0;
     for (let i = 0; i < bucketCount; i++) {
         let tempIndex = [];
         allBuckets[i] = await bucketInsertion(allBuckets[i], helperFunctions);
@@ -455,39 +459,37 @@ async function Sort_book1(localArr, p, r, K, helperFunctions) {
     return Promise;
 }
 
-async function limited_quickSort(localArr,p,r,K,helperFunctions)
-{
-    if(r-p > K)
-    {
+async function limited_quickSort(localArr, p, r, K, helperFunctions) {
+    if (r - p > K) {
         let q;
-        [localArr, q] = await partition(localArr,p,r,helperFunctions);
-        localArr = await limited_quickSort(localArr,p,q-1,K,helperFunctions);
-        localArr = await limited_quickSort(localArr,q+1,r,K,helperFunctions);
+        [localArr, q] = await partition(localArr, p, r, helperFunctions);
+        localArr = await limited_quickSort(localArr, p, q - 1, K, helperFunctions);
+        localArr = await limited_quickSort(localArr, q + 1, r, K, helperFunctions);
     }
     return Promise.resolve(localArr);
 }
 
-async function modified_insertionSort(localArr,p,r, helperFunctions) {
+async function modified_insertionSort(localArr, p, r, helperFunctions) {
     await helperFunctions.sleep(1000);
     let i, j;
-    for (i = p+1; i < r; i++) {
+    for (i = p + 1; i <= r; i++) {
         j = i;
         while (j >= 0 && localArr[j] < localArr[j - 1]) {
-            await helperFunctions.animateColor([j, j - 1]);
+            await helperFunctions.animateColor([1, j, j - 1]);
             localArr = await helperFunctions.swap(localArr, j, j - 1);
             j = j - 1;
         }
     }
-    // await helperFunctions.completeSorted();
+    await helperFunctions.completeSorted();
 
 }
 
-async function modifiedCountSort(arr, min, max, a, b, helperFunctions){
+async function modifiedCountSort(arr, min, max, a, b, helperFunctions) {
     let i = min,
-    j = 0,
-    len = arr.length,
-    count = [],
-    auxArr = [];
+        j = 0,
+        len = arr.length,
+        count = [],
+        auxArr = [];
     for (i; i <= max; i++) {
         count[i] = 0;
         auxArr[i] = 0;
@@ -498,21 +500,31 @@ async function modifiedCountSort(arr, min, max, a, b, helperFunctions){
         await helperFunctions.handleFreqChange(count);
     }
     for (i = min; i <= max; i++) {
-        if(i === 0){
+        if (i === 0) {
             auxArr[i] = count[i];
         }
-        else{
-            auxArr[i] = auxArr[i-1] + count[i]
+        else {
+            auxArr[i] = auxArr[i - 1] + count[i]
         }
     }
     // arr = await helperFunctions.clearArr();
+    
     console.log(auxArr);
     console.log(count);
-    let numOfIntegers=auxArr[b] - auxArr[a-1];
-    console.log("Numbers between " + a + " and " + b + " are : " + numOfIntegers)
-    
-
-
+    let numOfIntegers = auxArr[b] - auxArr[a - 1];
+    let X=[];
+    j=0;
+    for (i = 0; i < arr.length; i++) {
+        if(arr[i]>=a && arr[i]<=b){
+            X[j] = arr[i];
+            j++;
+        }
+    }
+    console.log(X);
+    await helperFunctions.fillArr(X);
+    await helperFunctions.removeFreqTable();
+    await helperFunctions.countHandle(a,b,numOfIntegers);
+    // console.log("Numbers between " + a + " and " + b + " are : " + numOfIntegers)
     return Promise.resolve(count);
 }
 

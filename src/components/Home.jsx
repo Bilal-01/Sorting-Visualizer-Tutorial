@@ -4,13 +4,14 @@ import Algorithms from './Algorithms';
 import BarContainer from './BarContainer';
 import AlgoContext from './AlgoContext';
 import FreqTable from './FreqTable';
+import ShowCount from './ShowCount';
 import '../css/home.css';
 
 /*
 RESTRICTIONS
         1. Negative Numbers
         2. Real Numbers
-        3. Range : 1 - 500?
+        3. Range : 1 - 400?
 */
 
 function Home() {
@@ -22,6 +23,7 @@ function Home() {
         <>
             <div className='home'>
                 {algo.isFreqTable ? <FreqTable />:null}
+                {!algo.isFreqTable && algo.algorithm === 'Modified Countsort'? <ShowCount />:null}
                 <div className ='rowC'>
                     <BarContainer />
                     <div>

@@ -12,7 +12,8 @@ function App() {
   const [inputArr, setInputArr] = useState([]);
   const [isSorted, setIsSorted] = useState(false);
   const [isFreqTable, setIsFreqTable] = useState(false);
-  const [freq, setFreq] = useState([0,0,0,0,0,0,0,0,0,0,0]);
+  const [freq, setFreq] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+  const [count, setCount] =([]);
 
   var algo = {
     algorithm,
@@ -22,6 +23,7 @@ function App() {
     inputArr,
     isFreqTable,
     freq,
+    count,
     setAlgorithm,
     setArr,
     setIndices,
@@ -29,6 +31,7 @@ function App() {
     setInputArr,
     setIsFreqTable,
     setFreq,
+    setCount,
   }
 
 
