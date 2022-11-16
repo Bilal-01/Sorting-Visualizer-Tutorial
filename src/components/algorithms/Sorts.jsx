@@ -496,7 +496,7 @@ async function modifiedCountSort(arr, min, max, a, b, helperFunctions) {
     }
     for (i = 0; i < len; i++) {
         count[arr[i]] += 1;
-        //await helperFunctions.animateColor([i]);
+        await helperFunctions.animateColor([i]);
         await helperFunctions.handleFreqChange(count);
     }
     for (i = min; i <= max; i++) {

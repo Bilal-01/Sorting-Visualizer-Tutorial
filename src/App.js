@@ -13,7 +13,7 @@ function App() {
   const [isSorted, setIsSorted] = useState(false);
   const [isFreqTable, setIsFreqTable] = useState(false);
   const [freq, setFreq] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-  const [count, setCount] =([]);
+  const [count, setCount] = useState([0,0,0]);
 
   var algo = {
     algorithm,
