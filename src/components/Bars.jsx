@@ -91,7 +91,7 @@ function Bars(props) {
                 }
             }
         }
-        else if (algo.algorithm === 'Modified Quicksort' && !algo.isSorted) {
+        else if (algo.algorithm === 'Modified Quick' && !algo.isSorted) {
             console.log("index= " + algo.indices[0]);
             if (algo.indices[0] === 1) {
                 for (let i = 1; i < algo.indices.length; i++) {

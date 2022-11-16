@@ -41,7 +41,7 @@ function Algorithms() {
     let mergeStr = [
 
         "If the left index of array is less than the right index,calculate its mid point",
-        "Merge sort first divides the whole array iteratively into equal halves, unless the atomic values are achieved.",
+        "Divide array into equal halves, unless the atomic values are achieved.",
         "Again find that is left index is less than the right index for both arrays, if found yes, then again calculate mid points for both the arrays.",
         "Further divide these two arrays into further halves, until the atomic units of the array is reached and further division is not possible.",
         "After dividing the array into smallest units, start merging the elements again based on comparison of size of elements",
@@ -69,6 +69,19 @@ function Algorithms() {
         "decrease counter by 1",
     ]
 
+    let modifiedQuickStr = [
+        "Define a threshold",
+        "Apply Quicksort until (high - low) > threshold",
+        "Apply insertion sort on the 'nearly' sorted array",
+    ]
+
+    
+    let modifiedCountStr = [
+        "Create a frequency array and initialize it with 0",
+        "Create a prefix sum array => B[i]",
+        "Number of integers in given range => B[b] - B[a - 1] ( B[-1] = 0 )",
+    ]
+
     useEffect(() => {
         if (algo.algorithm === 'Bubble') {
             setAlgoText(bubbleStr);
@@ -90,6 +103,12 @@ function Algorithms() {
         }
         if (algo.algorithm === 'Counting') {
             setAlgoText(countStr);
+        }
+        if (algo.algorithm === 'Modified Quick') {
+            setAlgoText(modifiedQuickStr);
+        }
+        if (algo.algorithm === 'Modified Count') {
+            setAlgoText(modifiedCountStr);
         }
     }, [algo.algorithm]);
 
