@@ -4,7 +4,7 @@ import AlgoContext from '../AlgoContext';
 
 function Sorts(props) {
     const algo = useContext(AlgoContext);
-
+    const [colorLine, setColorLine] = useState(0);
 
     const helperFunctions = {
         swap,
@@ -18,6 +18,7 @@ function Sorts(props) {
         bucketAnimation,
         removeFreqTable,
         countHandle,
+        animateLine,
     };
 
     useEffect(() => {
@@ -90,68 +91,79 @@ function Sorts(props) {
         return Promise;
     }
 
-    return (
-        props.code.map((line, i) => {
-            return <p key={i}>{line}</p>
-        })
-    );
-
+    
     async function mergeAnimation(arr) {
         let tempArr = [...arr];
         await sleep(1000);
         algo.setArr(tempArr);
         return Promise;
-
+        
     }
-
+    
     async function handleFreqChange(arr) {
         await sleep(500);
         algo.setFreq([...arr]);
         return Promise;
     }
-
+    
     async function removeFreqTable()
     {
         await sleep(500);
         algo.setIsFreqTable(false);
         return Promise;
     }
-
+    
     async function clearArr() {
         let temp = [];
         algo.setArr([]);
         return Promise.resolve(temp);
     }
-
+    
     async function fillArr(arr) {
         algo.setArr([...arr]);
         return Promise;
     }
-
-
+    
+    
     async function bucketAnimation(i, arr) {
         await sleep(500);
         let temp = [...arr];
         algo.setIndices([i, temp]);
         console.log(algo.indices);
         return Promise;
-
+        
     }
-
+    
     async function countHandle(a,b,count)
     {
         algo.setCount([a,b,count]);
         return Promise;
     }
-
+    
+    async function animateLine(line){
+        await sleep(500);
+        await setColorLine(line);
+        return Promise;
+    }
+    
+    return (
+        props.code.map((line, i) => {
+            return <p style={i === colorLine ? {backgroundColor: 'black', color: 'white'} : null} key={i}>{line}</p>
+        })
+    );
+    
 }
 
 async function bubbleSort(localArr, helperFunctions) {
     await helperFunctions.sleep(1000);
     for (var i = 0; i < localArr.length; i++) {
+        await helperFunctions.animateLine(0);
         for (var j = 0; j < (localArr.length - i - 1); j++) {
-            await helperFunctions.animateColor([j, j + 1]);
+            await helperFunctions.animateLine(1);
+            await helperFunctions.animateColor([j, j + 1]);    
+            await helperFunctions.animateLine(2);
             if (localArr[j] > localArr[j + 1]) {
+                await helperFunctions.animateLine(3);
                 localArr = await helperFunctions.swap(localArr, j, j + 1);
             }
         }

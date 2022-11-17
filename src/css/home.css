@@ -42,34 +42,3 @@
     justify-content: space-between;
 }
 
-.time-btn, .space-btn{
-    background: #112B3C;
-    color: #D3E4CD;
-    padding: 10px 10px;
-    border-radius: 5px;
-    margin-right: 2px;
-    font-size: 0.85rem;
-    font-weight: bolder;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-
-
-.time-btn:hover{
-    background: #F66B0E;
-    color: #112B3C;
-    transition: 0.3s all;
-    cursor: pointer;
-}
-
-
-.space-btn{
-    background: #F66B0E;
-    color: #112B3C;
-}
-
-.space-btn:hover{
-    background: #112B3C;
-    color: #D3E4CD;
-    cursor: pointer;
-    transition: 0.3s all;
-}

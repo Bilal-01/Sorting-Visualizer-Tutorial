@@ -5,6 +5,7 @@ import BarContainer from './BarContainer';
 import AlgoContext from './AlgoContext';
 import FreqTable from './FreqTable';
 import ShowCount from './ShowCount';
+import ComplexityModal from './ComplexityModal';
 import '../css/home.css';
 
 /*
@@ -31,12 +32,8 @@ function Home() {
                             <Algorithms/>
                         </div>
                         <div className="complexity-container">
-                            <button className="time-btn">
-                                Time Complexity
-                            </button>
-                            <button className="space-btn">
-                                Space Complexity
-                            </button>
+                            <ComplexityModal complexity='Time' />
+                            <ComplexityModal complexity='Space' />
                         </div>
                     </div>
                 </div>
