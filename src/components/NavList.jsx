@@ -41,11 +41,11 @@ function NavList () {
             }}>
                 Counting Sort
             </button>
-            <button className='nav-link' onClick={() => algo.setAlgorithm('Modified Quicksort')}>
+            <button className='nav-link' onClick={() => algo.setAlgorithm('Modified Quick')}>
                7.4.5 Sort
             </button>
             <button className='nav-link' onClick={() => {
-                algo.setAlgorithm('Modified Countsort');
+                algo.setAlgorithm('Modified Count');
                 algo.setIsFreqTable(true);
             }}>
                 8.2.4 Sort

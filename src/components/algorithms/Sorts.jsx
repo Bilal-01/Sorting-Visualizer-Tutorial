@@ -51,10 +51,10 @@ function Sorts(props) {
         else if (algo.algorithm === 'Bucket') {
             bucketSort(localArr, helperFunctions);
         }
-        else if (algo.algorithm === 'Modified Quicksort') {
+        else if (algo.algorithm === 'Modified Quick') {
             Sort_book1(localArr, 0, 14, 4, helperFunctions);
         }
-        else if (algo.algorithm === 'Modified Countsort') {
+        else if (algo.algorithm === 'Modified Count') {
             modifiedCountSort(localArr, 0, 10, 3, 8, helperFunctions)
         }
     }, [algo.algorithm]);
