@@ -4,7 +4,15 @@ import AlgoContext from '../AlgoContext';
 
 function Sorts(props) {
     const algo = useContext(AlgoContext);
-    const [colorLine, setColorLine] = useState(0);
+    const [colorLine, setColorLine] = useState([]);
+
+    const lineStyle = {
+        backgroundColor: colorLine[1], 
+        color: colorLine[2],
+        padding: '10px 15px',
+        transition: '1s all',
+
+    }
 
     const helperFunctions = {
         swap,
@@ -140,15 +148,15 @@ function Sorts(props) {
         return Promise;
     }
     
-    async function animateLine(line){
+    async function animateLine(line, bgColor, txtColor){
         await sleep(500);
-        await setColorLine(line);
+        await setColorLine(line, bgColor, txtColor);
         return Promise;
     }
     
     return (
         props.code.map((line, i) => {
-            return <p style={i === colorLine ? {backgroundColor: 'black', color: 'white'} : null} key={i}>{line}</p>
+            return <p style={i === colorLine ? lineStyle : {padding: '10px 15px'}} key={i}>{line}</p>
         })
     );
     
@@ -157,13 +165,13 @@ function Sorts(props) {
 async function bubbleSort(localArr, helperFunctions) {
     await helperFunctions.sleep(1000);
     for (var i = 0; i < localArr.length; i++) {
-        await helperFunctions.animateLine(0);
+        await helperFunctions.animateLine(0, 'black', 'white');
         for (var j = 0; j < (localArr.length - i - 1); j++) {
             await helperFunctions.animateLine(1);
             await helperFunctions.animateColor([j, j + 1]);    
             await helperFunctions.animateLine(2);
             if (localArr[j] > localArr[j + 1]) {
-                await helperFunctions.animateLine(3);
+                await helperFunctions.animateLine(3, '#112B3C', '#F66B0E');
                 localArr = await helperFunctions.swap(localArr, j, j + 1);
             }
         }
@@ -175,11 +183,17 @@ async function insertionSort(localArr, helperFunctions) {
     await helperFunctions.sleep(1000);
     let i, j;
     for (i = 1; i < localArr.length; i++) {
+        await helperFunctions.animateLine(0);
         j = i;
+        await helperFunctions.animateLine(1);
+        
         while (j >= 0 && localArr[j] < localArr[j - 1]) {
+            await helperFunctions.animateLine(2);
             await helperFunctions.animateColor([j, j - 1]);
+            await helperFunctions.animateLine(3)
             localArr = await helperFunctions.swap(localArr, j, j - 1);
             j = j - 1;
+            await helperFunctions.animateLine(4)
         }
     }
     await helperFunctions.completeSorted();
@@ -188,17 +202,21 @@ async function insertionSort(localArr, helperFunctions) {
 
 
 async function partition(localArr, low, high, helperFunctions) {
-
+    await helperFunctions.animateLine(0);
     let pivot = localArr[high];
+    await helperFunctions.animateLine(1);
     let i = (low - 1);
     for (let j = low; j <= high - 1; j++) {
+        await helperFunctions.animateLine(2);
         if (localArr[j] < pivot) {
             i++;
             await helperFunctions.animateColor([0, i, j]);
+            await helperFunctions.animateLine(3);
             localArr = await helperFunctions.swap(localArr, i, j);
         }
     }
     await helperFunctions.animateColor([0, i + 1, high]);
+    await helperFunctions.animateLine(4);
     localArr = await helperFunctions.swap(localArr, i + 1, high);
     return Promise.resolve([localArr, i + 1]);
 
@@ -207,7 +225,9 @@ async function quickSort(localArr, low, high, helperFunctions) {
     if (low < high) {
         let pi;
         [localArr, pi] = await partition(localArr, low, high, helperFunctions);
+        await helperFunctions.animateLine(5);
         localArr = await quickSort(localArr, low, pi - 1, helperFunctions);
+        await helperFunctions.animateLine(6);
         localArr = await quickSort(localArr, pi + 1, high, helperFunctions);
     }
     else {

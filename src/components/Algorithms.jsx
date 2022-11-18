@@ -24,14 +24,14 @@ function Algorithms() {
     let quickStr = [
         "Choose the high-index Pivot.",
         "Take two variables to point Left and Right of the list excluding Pivot.",
-        "Left points to the low index.",
-        "Right points to the high index.",
-        "If the value at the Left is less than the pivot move in the right direction.",
-        "If the value at the Right is greater than the pivot move in the left direction.",
+        "For each element in arr from left to right",
+        "if arr[j] < pivot, then swap(arr[left] and arr[right]",
+        "Swap the pivot with Right index",
+        "Apply Quicksort on subarray arr[ low .. pivot ]",
+        "Apply Quicksort on subarray arr[ pivot + 1.. high ]",
     ]
 
     let bucketStr = [
-
         "Make B buckets, each of which can store a range of values for all of the buckets.",
         "Fill each bucket with 0 values for all buckets.",
         "Put elements in buckets that match the range for all buckets.",
