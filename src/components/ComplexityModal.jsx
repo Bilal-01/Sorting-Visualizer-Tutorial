@@ -7,6 +7,9 @@ import '../css/complexity.css';
 import AlgoContext from './AlgoContext';
 import bubbleImg from './../images/bubble.jpg'
 import insertionImg from './../images/insertion.jpg'
+import quickImg from './../images/quick.jpg'
+import heapImg from './../images/heap.jpg'
+import bucketImg from './../images/bucket.jpg'
 
 const style = {
   position: 'absolute',
@@ -68,6 +71,16 @@ export default function ComplexityModal(props) {
   if(algo.algorithm === 'Insertion'){
     img = insertionImg;
   }
+  if(algo.algorithm === 'Quick'){
+    img = quickImg;
+  }
+  if(algo.algorithm === 'Heap'){
+    img = heapImg;
+  }
+  if(algo.algorithm === 'Bucket'){
+    img = bucketImg;
+  }
+
 
 //{props.complexity === 'Time' ? '.time-btn' : '.space-btn'}
   return (
@@ -81,7 +94,7 @@ export default function ComplexityModal(props) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            {algo.alogrithm} Sort
+            {algo.algorithm} Sort
           </Typography>
           <img src={img} alt="sorting image" style={imgStyle} />
         </Box>
