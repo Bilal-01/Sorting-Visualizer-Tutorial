@@ -11,7 +11,6 @@ function ShowCount()
         width: '50%',
         padding: '5px 20px'
     }
-    console.log("I am in show count");
     return (
         <div style={styles}>
             Numbers between  {algo.count[0]}  and {algo.count[1]}   are : {algo.count[2]}

@@ -4,11 +4,11 @@ import AlgoContext from '../AlgoContext';
 
 function Sorts(props) {
     const algo = useContext(AlgoContext);
-    const [colorLine, setColorLine] = useState([]);
+    const [colorLine, setColorLine] = useState(0);
 
     const lineStyle = {
-        backgroundColor: colorLine[1], 
-        color: colorLine[2],
+        backgroundColor: 'black', 
+        color: 'white',
         padding: '10px 15px',
         transition: '1s all',
 
@@ -27,6 +27,7 @@ function Sorts(props) {
         removeFreqTable,
         countHandle,
         animateLine,
+        copyValue,
     };
 
     useEffect(() => {
@@ -77,7 +78,7 @@ function Sorts(props) {
     }
 
     async function animateColor(arr) {
-        await sleep(100);
+        await sleep(1000);
         let indices = [...arr];
         algo.setIndices(indices);
         return Promise;
@@ -92,6 +93,15 @@ function Sorts(props) {
         await sleep(500);
         algo.setArr(tempArr);
         return Promise.resolve(tempArr);
+    }
+
+    async function copyValue(input, output, i, j){
+        let tempInput = [...input];
+        let tempOutput = [...output];
+        tempOutput[j] = tempInput[i];
+        await sleep(500);
+        algo.setArr(tempOutput);
+        return Promise.resolve(tempOutput);
     }
 
     async function completeSorted() {
@@ -152,7 +162,7 @@ function Sorts(props) {
     }
     
     async function animateLine(line){
-        await sleep(50);
+        await sleep(500);
         await setColorLine(line);
         return Promise;
     }
@@ -207,19 +217,18 @@ async function insertionSort(localArr, helperFunctions) {
 async function partition(localArr, low, high, helperFunctions) {
     await helperFunctions.animateLine(0);
     let pivot = localArr[high];
-    await helperFunctions.animateLine(1);
     let i = (low - 1);
     for (let j = low; j <= high - 1; j++) {
-        await helperFunctions.animateLine(2);
+        await helperFunctions.animateLine(1);
         if (localArr[j] < pivot) {
             i++;
             await helperFunctions.animateColor([0, i, j]);
-            await helperFunctions.animateLine(3);
+            await helperFunctions.animateLine(2);
             localArr = await helperFunctions.swap(localArr, i, j);
         }
     }
     await helperFunctions.animateColor([0, i + 1, high]);
-    await helperFunctions.animateLine(4);
+    await helperFunctions.animateLine(3);
     localArr = await helperFunctions.swap(localArr, i + 1, high);
     return Promise.resolve([localArr, i + 1]);
 
@@ -228,9 +237,9 @@ async function quickSort(localArr, low, high, helperFunctions) {
     if (low < high) {
         let pi;
         [localArr, pi] = await partition(localArr, low, high, helperFunctions);
-        await helperFunctions.animateLine(5);
+        await helperFunctions.animateLine(4);
         localArr = await quickSort(localArr, low, pi - 1, helperFunctions);
-        await helperFunctions.animateLine(6);
+        await helperFunctions.animateLine(5);
         localArr = await quickSort(localArr, pi + 1, high, helperFunctions);
     }
     else {
@@ -360,8 +369,9 @@ async function getMax(arr, n) {
             mx = arr[i];
     return Promise.resolve(mx);
 }
+
 async function radixHelper(arr, n, exp, helperFunctions) {
-    let output = new Array(n);
+    let output = [...arr];
     let i;
     let count = new Array(10);
     for (let i = 0; i < 10; i++)
@@ -371,17 +381,13 @@ async function radixHelper(arr, n, exp, helperFunctions) {
     for (i = 1; i < 10; i++)
         count[i] += count[i - 1];
     for (i = n - 1; i >= 0; i--) {
-
-        await helperFunctions.animateColor([count[Math.floor(arr[i] / exp) % 10] - 1, i]);
-        arr = await helperFunctions.swap(arr, [count[Math.floor(arr[i] / exp) % 10] - 1], i);
-        output[count[Math.floor(arr[i] / exp) % 10] - 1] = arr[i];
-        console.log(arr)
-        console.log(count[Math.floor(arr[i] / exp) % 10] - 1)
+        console.log("Index = " + i + "  expression = " + exp +  "  Output array Index: " + output[count[Math.floor(arr[i] / exp) % 10] - 1]);
+        await helperFunctions.animateColor([exp, i, count[Math.floor(arr[i] / exp) % 10] - 1])
+        output = await helperFunctions.copyValue(arr, output, i, count[Math.floor(arr[i] / exp) % 10] - 1);
         count[Math.floor(arr[i] / exp) % 10]--;
     }
-    for (i = 0; i < n; i++)
+    for (i = 0; i < n; i++){
         arr[i] = output[i];
-
     return Promise.resolve(arr);
 }
 
@@ -390,6 +396,8 @@ async function radixsort(arr, n, helperFunctions) {
     let m = await getMax(arr, n);
     for (let exp = 1; Math.floor(m / exp) > 0; exp *= 10)
         arr = await radixHelper(arr, n, exp, helperFunctions);
+    
+    await helperFunctions.completeSorted()
     console.log(arr);
 }
 
@@ -488,8 +496,6 @@ async function bucketSort(arr, helperFunctions) {
             tempIndex.push(k);
             k++;
         }
-        console.log(arr);
-        console.log(tempIndex);
         await helperFunctions.animateColor([i, ...tempIndex]);
         await helperFunctions.fillArr(arr);
         await helperFunctions.sleep(1000);

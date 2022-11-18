@@ -26,7 +26,6 @@ function NavList () {
             </button>
             <button className='nav-link' onClick={() => {
                 algo.setAlgorithm('Radix');
-                algo.setIsFreqTable(true);
             }}>
                 Radix Sort
             </button>

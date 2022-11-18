@@ -31,6 +31,32 @@ function Bars(props) {
 
 
     function setColor() {
+        if (algo.algorithm === 'Radix' && !algo.isSorted){
+            if(algo.indices[0] === 1){
+                for (let i = 1; i < algo.indices.length; i++) {
+                    if (props.index === algo.indices[i]) {
+                        return 'FBAB50';
+                    }
+                }
+                return 'F66B0E';
+            }
+            if(algo.indices[0] === 10){
+                for (let i = 1; i < algo.indices.length; i++) {
+                    if (props.index === algo.indices[i]) {
+                        return 'FFB703';
+                    }
+                }
+                return 'F66B0E';
+            }
+            if(algo.indices[0] === 100){
+                for (let i = 1; i < algo.indices.length; i++) {
+                    if (props.index === algo.indices[i]) {
+                        return '817425';
+                    }
+                }
+                return 'F66B0E';
+            }
+        }
         if (algo.algorithm === 'Bucket' && !algo.isSorted) {
             if (algo.indices[0] === 0) {
                 for (let i = 1; i < algo.indices.length; i++) {

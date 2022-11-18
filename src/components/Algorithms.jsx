@@ -25,9 +25,8 @@ function Algorithms() {
 
     let quickStr = [
         "Choose the high-index Pivot.",
-        "Take two variables to point Left and Right of the list excluding Pivot.",
         "For each element in arr from left to right",
-        "if arr[j] < pivot, then swap(arr[left] and arr[right]",
+        "if arr[j] < pivot, then swap(arr[left] and arr[right])",
         "Swap the pivot with Right index",
         "Apply Quicksort on subarray arr[ low .. pivot ]",
         "Apply Quicksort on subarray arr[ pivot + 1.. high ]",
