@@ -77,7 +77,7 @@ function Sorts(props) {
     }
 
     async function animateColor(arr) {
-        await sleep(1000);
+        await sleep(100);
         let indices = [...arr];
         algo.setIndices(indices);
         return Promise;
@@ -144,13 +144,16 @@ function Sorts(props) {
     
     async function countHandle(a,b,count)
     {
-        algo.setCount([a,b,count]);
+        let temp = [a, b, count]
+        algo.setCount(temp);
+        console.log(a + " " + b + " " + count);
+        console.log("Show count: " + algo.count);
         return Promise;
     }
     
-    async function animateLine(line, bgColor, txtColor){
-        await sleep(500);
-        await setColorLine(line, bgColor, txtColor);
+    async function animateLine(line){
+        await sleep(50);
+        await setColorLine(line);
         return Promise;
     }
     
@@ -309,29 +312,40 @@ async function mergeSort(arr, l, r, helperFunctions) {
 
 
 async function heapSort(arr, helperFunctions) {
+    
+    await helperFunctions.animateLine(4);
     var N = arr.length;
     for (var i = Math.floor(N / 2) - 1; i >= 0; i--)
+        await helperFunctions.animateLine(5);
         arr = await heapify(arr, N, i, helperFunctions);
     for (var i = N - 1; i > 0; i--) {
         await helperFunctions.animateColor([0, i]);
+        await helperFunctions.animateLine(6)
         arr = await helperFunctions.swap(arr, 0, i);
+        await helperFunctions.animateLine(5);
         arr = await heapify(arr, i, 0, helperFunctions);
     }
     await helperFunctions.completeSorted();
 }
 async function heapify(arr, N, i, helperFunctions) {
+    
+    await helperFunctions.animateLine(0);
     var largest = i;
     var l = 2 * i + 1;
     var r = 2 * i + 2;
 
+    
+    await helperFunctions.animateLine(1);
     if (l < N && arr[l] > arr[largest])
         largest = l;
 
+    await helperFunctions.animateLine(2);
     if (r < N && arr[r] > arr[largest])
         largest = r;
 
-    if (largest != i) {
-        await helperFunctions.animateColor([i, largest]);
+        if (largest != i) {
+            await helperFunctions.animateColor([i, largest]);
+            await helperFunctions.animateLine(3)
         arr = await helperFunctions.swap(arr, i, largest);
         arr = await heapify(arr, N, largest, helperFunctions);
     }
@@ -385,23 +399,34 @@ async function countSort(arr, min, max, helperFunctions) {
     let i = min,
         j = 0,
         len = arr.length,
+        
         count = [];
-    for (i; i <= max; i++) {
+        await helperFunctions.animateLine(0);
+        for (i; i <= max; i++) {
         count[i] = 0;
     }
     for (i = 0; i < len; i++) {
+        await helperFunctions.animateLine(1)
+        
         count[arr[i]] += 1;
+        await helperFunctions.animateLine(2)
         await helperFunctions.animateColor([i]);
         await helperFunctions.handleFreqChange(count);
     }
     arr = await helperFunctions.clearArr();
     console.log(arr)
 
+    
+    await helperFunctions.animateLine(3)
     for (i = min; i <= max; i++) {
         while (count[i] > 0) {
+            await helperFunctions.animateLine(4);
             arr[j] = i;
+            await helperFunctions.animateLine(5);
             j++;
             count[i]--;
+            await helperFunctions.animateLine(6)
+            await helperFunctions.handleFreqChange(count)
             await helperFunctions.fillArr(arr);
             console.log(arr);
             await helperFunctions.animateColor([j]);
@@ -430,14 +455,17 @@ async function bucketSort(arr, helperFunctions) {
     })
     let bucketCount = Math.floor((maxValue - minValue) / bucketSize) + 1;
     let allBuckets = new Array(bucketCount);
+    await helperFunctions.animateLine(0);
     for (i = 0; i < allBuckets.length; i++) {
         allBuckets[i] = [];
     }
+    await helperFunctions.animateLine(1);
     let BucketIndex = new Array(bucketCount);
 
     for (i = 0; i < BucketIndex.length; i++) {
         BucketIndex[i] = [];
     }
+    await helperFunctions.animateLine(2);
     arr.forEach(function (currentVal, i) {
         allBuckets[Math.floor((currentVal - minValue) / bucketSize)].push(currentVal);
         BucketIndex[Math.floor((currentVal - minValue) / bucketSize)].push(i);
@@ -454,6 +482,7 @@ async function bucketSort(arr, helperFunctions) {
     for (let i = 0; i < bucketCount; i++) {
         let tempIndex = [];
         allBuckets[i] = await bucketInsertion(allBuckets[i], helperFunctions);
+        await helperFunctions.animateLine(3);
         for (let j = 0; j < allBuckets[i].length; j++) {
             arr.push(allBuckets[i][j]);
             tempIndex.push(k);
@@ -484,14 +513,17 @@ async function bucketInsertion(arr, helperFunctions) {
 };
 
 async function Sort_book1(localArr, p, r, K, helperFunctions) {
+    await helperFunctions.animateLine(0);
 
+    await helperFunctions.animateLine(1);
     localArr = await limited_quickSort(localArr, p, r, K, helperFunctions);
-    console.log("Limited QS " + localArr);
+    await helperFunctions.animateLine(2);
     localArr = await modified_insertionSort(localArr, p, r, helperFunctions);
     return Promise;
 }
 
 async function limited_quickSort(localArr, p, r, K, helperFunctions) {
+    
     if (r - p > K) {
         let q;
         [localArr, q] = await partition(localArr, p, r, helperFunctions);
@@ -517,6 +549,7 @@ async function modified_insertionSort(localArr, p, r, helperFunctions) {
 }
 
 async function modifiedCountSort(arr, min, max, a, b, helperFunctions) {
+    await helperFunctions.animateLine(0);
     let i = min,
         j = 0,
         len = arr.length,
@@ -527,10 +560,14 @@ async function modifiedCountSort(arr, min, max, a, b, helperFunctions) {
         auxArr[i] = 0;
     }
     for (i = 0; i < len; i++) {
+        await helperFunctions.animateLine(1);
         count[arr[i]] += 1;
+        await helperFunctions.animateLine(2);
         await helperFunctions.animateColor([i]);
         await helperFunctions.handleFreqChange(count);
     }
+    await helperFunctions.animateLine(3);
+    
     for (i = min; i <= max; i++) {
         if (i === 0) {
             auxArr[i] = count[i];
@@ -539,11 +576,10 @@ async function modifiedCountSort(arr, min, max, a, b, helperFunctions) {
             auxArr[i] = auxArr[i - 1] + count[i]
         }
     }
-    // arr = await helperFunctions.clearArr();
     
     console.log(auxArr);
     console.log(count);
-    let numOfIntegers = auxArr[b] - auxArr[a - 1];
+    
     let X=[];
     j=0;
     for (i = 0; i < arr.length; i++) {
@@ -552,7 +588,8 @@ async function modifiedCountSort(arr, min, max, a, b, helperFunctions) {
             j++;
         }
     }
-    console.log(X);
+    await helperFunctions.animateLine(4);
+    let numOfIntegers = auxArr[b] - auxArr[a - 1];
     await helperFunctions.fillArr(X);
     await helperFunctions.removeFreqTable();
     await helperFunctions.countHandle(a,b,numOfIntegers);

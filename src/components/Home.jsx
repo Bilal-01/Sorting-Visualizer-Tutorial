@@ -24,7 +24,9 @@ function Home() {
         <>
             <div className='home'>
                 {algo.isFreqTable ? <FreqTable />:null}
-                {!algo.isFreqTable && algo.algorithm === 'Modified Countsort'? <ShowCount />:null}
+                {console.log("Freq table: " + algo.isFreqTable + " algorithm: " + algo.algorithm)}
+
+                {!algo.isFreqTable && algo.algorithm === 'Modified Count'? <ShowCount />:null}
                 <div className ='rowC'>
                     <BarContainer />
                     <div>
