@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import '../css/complexity.css';
 import AlgoContext from './AlgoContext';
+import bubbleImg from './../images/bubble.jpg'
 import insertionImg from './../images/insertion.jpg'
 
 const style = {
@@ -61,6 +62,9 @@ export default function ComplexityModal(props) {
   const handleClose = () => setOpen(false);
 
   let img;
+  if(algo.algorithm === 'Bubble'){
+    img = bubbleImg;
+  }
   if(algo.algorithm === 'Insertion'){
     img = insertionImg;
   }

@@ -33,7 +33,6 @@ function Algorithms() {
     ]
 
     let bucketStr = [
-
         "Make B buckets, each of which can store a range of values for all of the buckets.", // n
         "Fill each bucket with 0 values for all buckets.", // n
         "Put elements in buckets that match the range for all buckets.", //k
