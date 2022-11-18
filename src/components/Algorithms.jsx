@@ -42,12 +42,11 @@ function Algorithms() {
 
     let mergeStr = [
 
-        "If the left index of array is less than the right index,calculate its mid point",
-        "Divide array into equal halves, unless the atomic values are achieved.",
-        "Again find that is left index is less than the right index for both arrays, if found yes, then again calculate mid points for both the arrays.",
-        "Further divide these two arrays into further halves, until the atomic units of the array is reached and further division is not possible.",
-        "After dividing the array into smallest units, start merging the elements again based on comparison of size of elements",
-        "Firstly, compare the element for each list and then combine them into another list in a sorted manner.",
+        "If the left index of array is less than the right index,calculate its mid point", // 1
+        "Call function recursively on left subarray: mergesSort(arr, low, mid )",  // log(n)
+        "Call function recursively on right subarray: mergeSort(arr, mid+1, high)", // log(n)
+        "Merge the left subarray and right subarray in a sorted order" // n
+        // O(n*logn) => O(nlogn)
     ]
 
     let heapStr = [
