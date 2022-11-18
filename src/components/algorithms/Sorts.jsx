@@ -308,15 +308,32 @@ async function merge(arr, l, m, r, helperFunctions) {
 }
 
 async function mergeSort(arr, l, r, helperFunctions) {
+    await helperFunctions.animateLine(0);
     if (l >= r) {
-        console.log("MERGE: "+ arr);
+        await helperFunctions.completeSorted();
         return Promise.resolve(arr);
+        
     }
     var m = l + parseInt((r - l) / 2);
+    await helperFunctions.animateLine(1);
+    let temp = addNumToArr(l, m);
+    await helperFunctions.animateColor(temp);
     arr = await mergeSort(arr, l, m, helperFunctions);
+    await helperFunctions.animateLine(2);
+    let temp2 = addNumToArr(m+1, r);
+    await helperFunctions.animateColor(temp2);
     arr = await mergeSort(arr, m + 1, r, helperFunctions);
+    await helperFunctions.animateLine(3);
     arr = await merge(arr, l, m, r, helperFunctions);
     return Promise.resolve(arr);
+}
+
+function addNumToArr(a, b){
+    let arr=[]
+    for(let i=a; i<=b; i++){
+        arr[i] = i;
+    };
+    return arr;
 }
 
 
@@ -342,8 +359,6 @@ async function heapify(arr, N, i, helperFunctions) {
     var largest = i;
     var l = 2 * i + 1;
     var r = 2 * i + 2;
-
-    
     await helperFunctions.animateLine(1);
     if (l < N && arr[l] > arr[largest])
         largest = l;
@@ -351,7 +366,6 @@ async function heapify(arr, N, i, helperFunctions) {
     await helperFunctions.animateLine(2);
     if (r < N && arr[r] > arr[largest])
         largest = r;
-
         if (largest != i) {
             await helperFunctions.animateColor([i, largest]);
             await helperFunctions.animateLine(3)
