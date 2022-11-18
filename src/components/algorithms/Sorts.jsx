@@ -374,18 +374,26 @@ async function radixHelper(arr, n, exp, helperFunctions) {
     let output = [...arr];
     let i;
     let count = new Array(10);
+    await helperFunctions.animateLine(2);
+    await helperFunctions.sleep(500);
     for (let i = 0; i < 10; i++)
         count[i] = 0;
     for (i = 0; i < n; i++)
         count[Math.floor(arr[i] / exp) % 10]++;
     for (i = 1; i < 10; i++)
         count[i] += count[i - 1];
+
+    await helperFunctions.animateLine(3);
     for (i = n - 1; i >= 0; i--) {
         console.log("Index = " + i + "  expression = " + exp +  "  Output array Index: " + output[count[Math.floor(arr[i] / exp) % 10] - 1]);
         await helperFunctions.animateColor([exp, i, count[Math.floor(arr[i] / exp) % 10] - 1])
         output = await helperFunctions.copyValue(arr, output, i, count[Math.floor(arr[i] / exp) % 10] - 1);
         count[Math.floor(arr[i] / exp) % 10]--;
     }
+
+
+    await helperFunctions.animateLine(4);
+    await helperFunctions.sleep(500);
     for (i = 0; i < n; i++){
         arr[i] = output[i];
     }
@@ -396,9 +404,13 @@ async function radixHelper(arr, n, exp, helperFunctions) {
 
 
 async function radixsort(arr, n, helperFunctions) {
+    await helperFunctions.animateLine(0);
     let m = await getMax(arr, n);
-    for (let exp = 1; Math.floor(m / exp) > 0; exp *= 10)
+    for (let exp = 1; Math.floor(m / exp) > 0; exp *= 10){
+        await helperFunctions.animateLine(1);
+        await helperFunctions.sleep(500);
         arr = await radixHelper(arr, n, exp, helperFunctions);
+    }
     
     await helperFunctions.completeSorted()
     console.log(arr);

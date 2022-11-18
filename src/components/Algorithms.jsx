@@ -88,6 +88,16 @@ function Algorithms() {
         "Number of integers in given range => B[b] - B[a - 1] ( B[-1] = 0 )", // 1
     ]
 
+    
+    let radixStr = [
+        "Get max element from the array",
+        "for the number of digits in the max number, do",
+        "Create an auxiliary array for frequency and calculate the prefix sum",
+        "Apply count sort on the array according to the digit i    [ i = 1, 2, 3 ]",
+        "Copy the values of digit-wise sorted array back to original array",
+
+    ]
+
     useEffect(() => {
         if (algo.algorithm === 'Bubble') {
             setAlgoText(bubbleStr);
@@ -106,6 +116,9 @@ function Algorithms() {
         }
         if (algo.algorithm === 'Bucket') {
             setAlgoText(bucketStr);
+        }
+        if (algo.algorithm === 'Radix') {
+            setAlgoText(radixStr);
         }
         if (algo.algorithm === 'Counting') {
             setAlgoText(countStr);
