@@ -10,6 +10,11 @@ import insertionImg from './../images/insertion.jpg'
 import quickImg from './../images/quick.jpg'
 import heapImg from './../images/heap.jpg'
 import bucketImg from './../images/bucket.jpg'
+import mergeImg from './../images/merge.jpg'
+import countImg from './../images/count.jpg'
+import radixImg from './../images/radix.jpg'
+import modifiedCountImg from './../images/modified_count.jpg'
+import modifiedQuickImg from './../images/modified_quick.jpg'
 
 const style = {
   position: 'absolute',
@@ -80,8 +85,21 @@ export default function ComplexityModal(props) {
   if(algo.algorithm === 'Bucket'){
     img = bucketImg;
   }
-
-
+  if(algo.algorithm === 'Merge'){
+    img = mergeImg;
+  }
+  if(algo.algorithm === 'Counting'){
+    img = countImg;
+  }
+  if(algo.algorithm === 'Radix'){
+    img = radixImg;
+  }
+  if (algo.algorithm === 'Modified Count'){
+    img = modifiedCountImg;
+  }
+  if (algo.algorithm === 'Modified Quick'){
+    img = modifiedQuickImg;
+  }
 //{props.complexity === 'Time' ? '.time-btn' : '.space-btn'}
   return (
       <div>

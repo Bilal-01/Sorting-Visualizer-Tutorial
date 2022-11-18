@@ -72,7 +72,7 @@ function Algorithms() {
     ]
 
     let modifiedQuickStr = [
-        "Define a threshold -- Threshold = 4",
+        "Define a threshold i.e. Threshold = 4",
         "Apply Quicksort until (high - low) > threshold",
         "Apply insertion sort on the 'nearly' sorted array",
     ]
@@ -89,7 +89,7 @@ function Algorithms() {
     
     let radixStr = [
         "Get max element from the array",
-        "for the number of digits in the max number, do",
+        "for the number of digits in the max number",
         "Create an auxiliary array for frequency and calculate the prefix sum",
         "Apply count sort on the array according to the digit i    [ i = 1, 2, 3 ]",
         "Copy the values of digit-wise sorted array back to original array",
