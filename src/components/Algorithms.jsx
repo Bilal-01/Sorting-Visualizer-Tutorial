@@ -7,18 +7,20 @@ function Algorithms() {
     const algo = useContext(AlgoContext);
     const [algoText, setAlgoText] = useState([]);
     let bubbleStr = [
-        `for(var i = 0; i < arr.length; i++)`,
-        `    for(var j = 0; j < ( arr.length - i -1 ); j++)`,
-        `      if(arr[j] > arr[j+1])`,
-        `        swap(arr[j] , arr[j + 1])`,
+        `for(var i = 0; i < arr.length; i++)`, //n
+        `    for(var j = 0; j < ( arr.length - i -1 ); j++)`, // n
+        `      if(arr[j] > arr[j+1])`, // 1
+        `        swap(arr[j] , arr[j + 1])`, // 1
+        // O(n^2)
     ];
 
     let insertionStr = [
-        "for (i = 1; i < arr.length; i++)",
-        " j = i",
-        " while (j >= 0 && arr[j] < arr[j - 1])",
-        " swap(arr[j],arr[j - 1])",
-        " j = j - 1",
+        "for (i = 1; i < arr.length; i++)", // n
+        " j = i", // 1
+        " while (j >= 0 && arr[j] < arr[j - 1])", //n-1
+        " swap(arr[j],arr[j - 1])", // 1
+        " j = j - 1", // 1
+        // O(n^2)
     ];
 
     let quickStr = [
@@ -32,10 +34,11 @@ function Algorithms() {
 
     let bucketStr = [
 
-        "Make B buckets, each of which can store a range of values for all of the buckets.",
-        "Fill each bucket with 0 values for all buckets.",
-        "Put elements in buckets that match the range for all buckets.",
-        "Sort elements in each bucket using INSERTION SORT and gather elements from each bucket"
+        "Make B buckets, each of which can store a range of values for all of the buckets.", // n
+        "Fill each bucket with 0 values for all buckets.", // n
+        "Put elements in buckets that match the range for all buckets.", //k
+        "Sort elements in each bucket using INSERTION SORT and gather elements from each bucket" // insertion in a bucket takes O(k) [assumption]
+        // n+k
     ]
 
     let mergeStr = [
@@ -49,7 +52,7 @@ function Algorithms() {
     ]
 
     let heapStr = [
-        " heapify(Arr, i)",
+        "heapify(Arr, i)",
              "if (left < N and Arr[left] > Arr[largest])->largest = l",
              "if (right < N && Arr[right] > Arr[largest])->largest = right;",
              "if (largest != i) swap(arr[i], Arr[largest]) & heapify(Arr, largest)",
@@ -60,26 +63,29 @@ function Algorithms() {
     ]
 
     let countStr = [
-        "create key (counting) array",
-        "for each element in list",
+        "create key (counting) array", // k
+        "for each element in list", // n
         "increase the respective counter by 1",
-        "for each counter, starting from smallest key",
-        "while counter is non-zero",
+        "for each counter, starting from smallest key", // n+k  
+        "while counter is non-zero", 
         "restore element to list",
         "decrease counter by 1",
+        // O(n + k)
     ]
 
     let modifiedQuickStr = [
-        "Define a threshold",
+        "Define a threshold -- Threshold = 4",
         "Apply Quicksort until (high - low) > threshold",
         "Apply insertion sort on the 'nearly' sorted array",
     ]
 
     
     let modifiedCountStr = [
-        "Create a frequency array and initialize it with 0",
-        "Create a prefix sum array => B[i]",
-        "Number of integers in given range => B[b] - B[a - 1] ( B[-1] = 0 )",
+        "Create a frequency array and initialize it with 0", //O(k)
+        "foreach element in original array", // n
+        "Fill the frequency array", // k
+        "Create a prefix sum array => B[i]", // k
+        "Number of integers in given range => B[b] - B[a - 1] ( B[-1] = 0 )", // 1
     ]
 
     useEffect(() => {

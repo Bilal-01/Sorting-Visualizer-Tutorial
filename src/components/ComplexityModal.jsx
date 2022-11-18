@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import '../css/complexity.css';
+import AlgoContext from './AlgoContext';
+import insertionImg from './../images/insertion.jpg'
 
 const style = {
   position: 'absolute',
@@ -47,10 +49,22 @@ const classes = {
     }
 }
 
+const imgStyle = {
+  width: '400px',
+  height: '300px'
+}
+
 export default function ComplexityModal(props) {
+  const algo = useContext(AlgoContext);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  let img;
+  if(algo.algorithm === 'Insertion'){
+    img = insertionImg;
+  }
+
 //{props.complexity === 'Time' ? '.time-btn' : '.space-btn'}
   return (
       <div>
@@ -63,11 +77,9 @@ export default function ComplexityModal(props) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
+            {algo.alogrithm} Sort
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+          <img src={img} alt="sorting image" style={imgStyle} />
         </Box>
       </Modal>
     </div>
