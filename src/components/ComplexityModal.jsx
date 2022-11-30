@@ -22,7 +22,9 @@ import S_countImg from './../images/S_count.jpg'
 import radixImg from './../images/radix.jpg'
 import S_radixImg from './../images/S_radix.jpg'
 import modifiedCountImg from './../images/modified_count.jpg'
+import S_modifiedCountImg from './../images/S_modified_count.jpg'
 import modifiedQuickImg from './../images/modified_quick.jpg'
+import S_modifiedQuickImg from './../images/S_modified_quick.jpg'
 
 const style = {
   position: 'absolute',
@@ -112,9 +114,10 @@ export default function ComplexityModal(props) {
   }
   if (algo.algorithm === 'Modified Count'){
     img = modifiedCountImg;
+    imgS = S_modifiedCountImg;
   }
   if (algo.algorithm === 'Modified Quick'){
-    img = modifiedQuickImg;
+    imgS = S_modifiedQuickImg;
   }
 //{props.complexity === 'Time' ? '.time-btn' : '.space-btn'}
   return (
