@@ -237,7 +237,7 @@ async function quickSort(localArr, low, high, helperFunctions) {
     if (low < high) {
         let pi;
         [localArr, pi] = await partition(localArr, low, high, helperFunctions);
-        await helperFunctions.animateLine(4);
+         await helperFunctions.animateLine(4);
         localArr = await quickSort(localArr, low, pi - 1, helperFunctions);
         await helperFunctions.animateLine(5);
         localArr = await quickSort(localArr, pi + 1, high, helperFunctions);

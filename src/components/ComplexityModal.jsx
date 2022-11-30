@@ -6,13 +6,21 @@ import Modal from '@mui/material/Modal';
 import '../css/complexity.css';
 import AlgoContext from './AlgoContext';
 import bubbleImg from './../images/bubble.jpg'
+import S_bubbleImg from './../images/S_bubble.jpg'
 import insertionImg from './../images/insertion.jpg'
+import S_insertionImg from './../images/S_insertion.jpg'
 import quickImg from './../images/quick.jpg'
+import S_quickImg from './../images/S_quick.jpg'
 import heapImg from './../images/heap.jpg'
+import S_heapImg from './../images/S_heap.jpg'
 import bucketImg from './../images/bucket.jpg'
+import S_bucketImg from './../images/S_bucket.jpg'
 import mergeImg from './../images/merge.jpg'
+import S_mergeImg from './../images/S_merge.jpg'
 import countImg from './../images/count.jpg'
+import S_countImg from './../images/S_count.jpg'
 import radixImg from './../images/radix.jpg'
+import S_radixImg from './../images/S_radix.jpg'
 import modifiedCountImg from './../images/modified_count.jpg'
 import modifiedQuickImg from './../images/modified_quick.jpg'
 
@@ -69,30 +77,38 @@ export default function ComplexityModal(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  let img;
+  let img, imgS;
   if(algo.algorithm === 'Bubble'){
     img = bubbleImg;
+    imgS = S_bubbleImg;
   }
   if(algo.algorithm === 'Insertion'){
     img = insertionImg;
+    imgS = S_insertionImg;
   }
   if(algo.algorithm === 'Quick'){
     img = quickImg;
+    imgS = S_quickImg;
   }
   if(algo.algorithm === 'Heap'){
     img = heapImg;
+    imgS = S_heapImg;
   }
   if(algo.algorithm === 'Bucket'){
     img = bucketImg;
+    imgS = S_bucketImg;
   }
   if(algo.algorithm === 'Merge'){
     img = mergeImg;
+    imgS = S_mergeImg;
   }
   if(algo.algorithm === 'Counting'){
     img = countImg;
+    imgS = S_countImg
   }
   if(algo.algorithm === 'Radix'){
     img = radixImg;
+    imgS = S_radixImg;
   }
   if (algo.algorithm === 'Modified Count'){
     img = modifiedCountImg;
@@ -114,7 +130,7 @@ export default function ComplexityModal(props) {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             {algo.algorithm} Sort
           </Typography>
-          <img src={img} alt="sorting image" style={imgStyle} />
+          <img src = {props.complexity === 'Time' ? img: imgS}  alt="sorting image" style={imgStyle} />
         </Box>
       </Modal>
     </div>
