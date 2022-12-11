@@ -31,7 +31,8 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: 600,
+  height: 500,
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -69,8 +70,12 @@ const classes = {
 }
 
 const imgStyle = {
-  width: '400px',
-  height: '300px'
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '600px',
+  height: '400px'
 }
 
 export default function ComplexityModal(props) {

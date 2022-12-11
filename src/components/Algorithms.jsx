@@ -57,7 +57,6 @@ function Algorithms() {
         "heapSort(Arr)",
         "do heapify(Arr,i)",
         "do swap(Arr[0], Arr[i]) & heapify(Arr,i)",
-
     ]
 
     let countStr = [

@@ -9,7 +9,7 @@ function Sorts(props) {
     const lineStyle = {
         backgroundColor: 'black', 
         color: 'white',
-        padding: '10px 15px',
+        padding: '5px 15px',
         transition: '1s all',
 
     }
@@ -169,7 +169,7 @@ function Sorts(props) {
     
     return (
         props.code.map((line, i) => {
-            return <p style={i === colorLine ? lineStyle : {padding: '10px 15px'}} key={i}>{line}</p>
+            return <p style={i === colorLine ? lineStyle : {padding: '5px 15px'}} key={i}>{line}</p>
         })
     );
     
